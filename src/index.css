@@ -1,33 +1,51 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500&family=Tajawal:wght@300;400;500;700;800&display=swap');
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Amiri", serif;
   --font-cursive: "Dancing Script", cursive;
+  --color-romantic-red: #ff4d6d;
+  --color-romantic-pink: #ff85a1;
+  --color-romantic-bg: #fff0f3;
 }
 
 body {
-  @apply bg-[#fff5f5] text-gray-800 antialiased overflow-x-hidden;
-}
-
-.heart-gradient {
-  background: radial-gradient(circle, #ff758c 0%, #ff7eb3 100%);
+  @apply bg-[#fff0f3] text-gray-800 antialiased overflow-x-hidden;
+  direction: rtl;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
 }
 
 .glass {
-  @apply bg-white/40 backdrop-blur-md border border-white/20;
+  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(255,182,193,0.3)];
 }
 
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+.text-gradient {
+  background: linear-gradient(to right, #ff4d6d, #ff85a1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.falling-item {
+/* Custom Petal Animation */
+@keyframes drift {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(110vh) translateX(100px) rotate(720deg); opacity: 0; }
+}
+
+.petal {
   position: fixed;
-  top: 100vh;
-  z-index: 0;
+  top: -10vh;
   pointer-events: none;
-  animation: float linear infinite;
+  z-index: 1;
+  animation: drift linear infinite;
+}
+
+.timeline-line {
+  background: linear-gradient(to bottom, #ffccd5, #ff4d6d, #ffccd5);
+}
+
+::selection {
+  @apply bg-romantic-pink/30 text-romantic-red;
 }

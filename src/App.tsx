@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
-import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target, Lock, Key } from 'lucide-react';
+import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target, Lock, Key, Clock } from 'lucide-react';
 import { format, differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import confetti from 'canvas-confetti';
 
@@ -231,43 +231,60 @@ const DriftingPetals = () => {
   );
 };
 
-const LoveTimelineItem = ({ date, title, description, icon: Icon, index }: any) => (
-  <motion.div
-    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true }}
-    className={`flex items-center w-full mb-12 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
-  >
-    <div className="hidden md:block w-1/2" />
-    <div className="z-20 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg border-4 border-romantic-pink">
-      <Icon className="text-romantic-red" size={20} />
-    </div>
-    <div className={`w-full md:w-1/2 p-4 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-      <div className="glass p-6 rounded-2xl">
-        <span className="text-romantic-red font-bold text-xs uppercase tracking-widest">{date}</span>
-        <h3 className="text-xl font-serif font-bold mt-1 text-gray-800">{title}</h3>
-        <p className="text-gray-600 mt-2 text-sm leading-relaxed">{description}</p>
-      </div>
-    </div>
-  </motion.div>
-);
-
 const SectionHeading = ({ children, subtitle }: { children: React.ReactNode; subtitle?: string }) => (
-  <div className="text-center mb-16 px-4">
+  <div className="text-center mb-24 px-4 relative">
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4">{children}</h2>
-      {subtitle && <p className="text-romantic-red font-cursive text-2xl">{subtitle}</p>}
-      <div className="flex items-center justify-center gap-4 mt-6">
-        <div className="h-[2px] w-12 bg-romantic-pink/30" />
-        <Star className="text-romantic-red fill-romantic-red" size={16} />
-        <div className="h-[2px] w-12 bg-romantic-pink/30" />
+      <div className="inline-flex items-center justify-center gap-3 mb-6">
+        <div className="h-[1px] w-8 bg-romantic-red/30" />
+        <Star className="text-romantic-red animate-pulse" size={14} />
+        <div className="h-[1px] w-8 bg-romantic-red/30" />
       </div>
+      <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6 tracking-tight">{children}</h2>
+      {subtitle && (
+        <p className="text-romantic-red font-cursive text-3xl opacity-80 rotate-[-1deg] transform transition-transform hover:rotate-0 duration-500">
+          {subtitle}
+        </p>
+      )}
     </motion.div>
   </div>
+);
+
+const LoveTimelineItem = ({ date, title, description, icon: Icon, index }: any) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.7, delay: index * 0.1 }}
+    className={`flex items-center w-full mb-20 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+  >
+    <div className="hidden md:block w-1/2" />
+    <div className="z-20 relative px-4">
+      <motion.div 
+        whileHover={{ scale: 1.2, rotate: 15 }}
+        className="flex items-center justify-center w-14 h-14 bg-white rounded-2xl shadow-xl border border-romantic-pink/20 text-romantic-red"
+      >
+        <Icon size={24} />
+      </motion.div>
+      <div className="absolute top-full left-1/2 -translate-x-1/2 h-20 w-[1px] bg-romantic-pink/20" />
+    </div>
+    <div className={`w-full md:w-1/2 p-4 ${index % 2 === 0 ? 'md:pr-16 text-right' : 'md:pl-16 text-left'}`}>
+      <motion.div 
+        whileHover={{ y: -5 }}
+        className="glass p-8 rounded-[2rem] group"
+      >
+        <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+          <span className="text-romantic-red font-bold text-[10px] uppercase tracking-[0.4em] bg-romantic-red/5 px-3 py-1 rounded-full">{date}</span>
+        </div>
+        <h3 className="text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-romantic-red transition-colors">{title}</h3>
+        <p className="text-gray-500 font-sans text-sm leading-relaxed antialiased">{description}</p>
+      </motion.div>
+    </div>
+  </motion.div>
 );
 
 // --- Main App ---
@@ -358,22 +375,22 @@ export default function App() {
 
   const timelineData = [
     { year: 2010, title: "بداية الرحلة", description: "بداية رحلة الحياة المليئة بالأمل والفرص الواعدة. الحياة بقى لونها بمبي💗", icon: Star },
-    { year: 2011, title: "خطوات واثقة", description: "خطوة جديدة نحو النجاح وبداية استكشاف مواهبكِ الكامنة.", icon: Star },
-    { year: 2012, title: "قوة ومثابرة", description: "هنا تثبتين أنكِ قوية ومثابرة في كل تفاصيل حياتكِ اليومية.", icon: Star },
-    { year: 2013, title: "الإصرار ينمو", description: "الإصرار ينمو معكِ، والحلم يصبح أقرب يوماً بعد يوم بفضل اجتهادكِ.", icon: Star },
-    { year: 2014, title: "طموح بلا حدود", description: "طموحكِ لا حدود له، والقادم دائماً أجمل بإذن الله لمن يسعى مثلكِ.", icon: Star },
-    { year: 2015, title: "تحدي الصعاب", description: "تخطين الصعاب برقة الورد وقوة الجبال، فخور جداً بمجهودكِ المميز.", icon: Star },
-    { year: 2016, title: "بصمة نجاح", description: "كل مجهود تبذلينه هو بصمة نجاح حقيقية في طريقكِ المشرق نحو التميز.", icon: Star },
-    { year: 2017, title: "ثقة بالنفس", description: "ثقتكِ بنفسكِ هي وقودكِ الحقيقي للوصول إلى أعلى القمم التي تطمحين إليها.", icon: Star },
-    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه. الحياة بقى لونها بمبي💗", icon: Star },
-    { year: 2019, title: "السعي المستمر", description: "استمري في السعي والمثابرة، فالنجاح يليق بكِ تماماً وبشخصيتكِ القوية.", icon: Star },
-    { year: 2020, title: "سنة التحديات", description: "سنة التحديات الكبرى التي أثبتتِ فيها للعالم أنكِ أقوى من أي ظرف صعب.", icon: Star },
+    { year: 2011, title: "خطوات واثقة", description: "خطوة جديدة نحو النجاح وبداية استكشاف مواهبكِ الكامنة.", icon: Camera },
+    { year: 2012, title: "قوة ومثابرة", description: "هنا تثبتين أنكِ قوية ومثابرة في كل تفاصيل حياتكِ اليومية.", icon: Heart },
+    { year: 2013, title: "الإصرار ينمو", description: "الإصرار ينمو معكِ، والحلم يصبح أقرب يوماً بعد يوم بفضل اجتهادكِ.", icon: Target },
+    { year: 2014, title: "طموح بلا حدود", description: "طموحكِ لا حدود له، والقادم دائماً أجمل بإذن الله لمن يسعى مثلكِ.", icon: Sparkles },
+    { year: 2015, title: "تحدي الصعاب", description: "تخطين الصعاب برقة الورد وقوة الجبال، فخور جداً بمجهودكِ المميز.", icon: Trophy },
+    { year: 2016, title: "بصمة نجاح", description: "كل مجهود تبذلينه هو بصمة نجاح حقيقية في طريقكِ المشرق نحو التميز.", icon: Gift },
+    { year: 2017, title: "ثقة بالنفس", description: "ثقتكِ بنفسكِ هي وقودكِ الحقيقي للوصول إلى أعلى القمم التي تطمحين إليها.", icon: Calendar },
+    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه. الحياة بقى لونها بمبي💗", icon: MapPin },
+    { year: 2019, title: "السعي المستمر", description: "استمري في السعي والمثابرة، فالنجاح يليق بكِ تماماً وبشخصيتكِ القوية.", icon: Quote },
+    { year: 2020, title: "سنة التحديات", description: "سنة التحديات الكبرى التي أثبتتِ فيها للعالم أنكِ أقوى من أي ظرف صعب.", icon: RefreshCw },
     { year: 2021, title: "إشراق دائم", description: "إشراقكِ الدائم وطاقتكِ يمنحان الجميع إلهاماً لا ينتهي للسعي والعمل.", icon: Star },
-    { year: 2022, title: "ذكاء وطموح", description: "الذكاء والطموح يجتمعان فيكِ ليرسما ملامح مستقبلكِ الباهر والناجح.", icon: Star },
-    { year: 2023, title: "تغلب على العقبات", description: "كل عقبة تغلبتِ عليها هي في الحقيقة قصة نجاح ملهمة تضاف إلى رصيدكِ.", icon: Star },
-    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل، وفعلاً الحياة بقى لونها بمبي💗", icon: Star },
-    { year: 2025, title: "قرب الحلم", description: "تقتربين من حلمكِ الكبير بخطوات واثقة، هادئة، ومدروسة كعادتكِ دائماً.", icon: Star },
-    { year: 2026, title: "فخر بالمستقبل", description: "فخور بكل ما وصلتِ إليه اليوم وبكل الإنجازات التي ستحققينها غداً.", icon: Star },
+    { year: 2022, title: "ذكاء وطموح", description: "الذكاء والطموح يجتمعان فيكِ ليرسما ملامح مستقبلكِ الباهر والناجح.", icon: Lock },
+    { year: 2023, title: "تغلب على العقبات", description: "كل عقبة تغلبتِ عليها هي في الحقيقة قصة نجاح ملهمة تضاف إلى رصيدكِ.", icon: Gamepad2 },
+    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل، وفعلاً الحياة بقى لونها بمبي💗", icon: Heart },
+    { year: 2025, title: "قرب الحلم", description: "تقتربين من حلمكِ الكبير بخطوات واثقة، هادئة، ومدروسة كعادتكِ دائماً.", icon: Target },
+    { year: 2026, title: "فخر بالمستقبل", description: "فخور بكل ما وصلتِ إليه اليوم وبكل الإنجازات التي ستحققينها غداً.", icon: Trophy },
   ].map(item => ({
     date: `عام ${item.year}`,
     title: item.title,
@@ -391,93 +408,105 @@ export default function App() {
             key="login"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 bg-romantic-bg"
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(40px)" }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 bg-romantic-bg overflow-hidden"
           >
-            <div className="absolute inset-0 z-0 opacity-30">
-              <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-romantic-pink rounded-full blur-[120px] animate-pulse" />
-              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-romantic-red/20 rounded-full blur-[150px] animate-pulse delay-1000" />
+            {/* Immersive Background Elements */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  x: [0, 50, 0],
+                  y: [0, 30, 0]
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-romantic-pink/10 rounded-full blur-[120px]" 
+              />
+              <motion.div 
+                animate={{ 
+                  scale: [1.2, 1, 1.2],
+                  x: [0, -40, 0],
+                  y: [0, -20, 0]
+                }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-romantic-red/10 rounded-full blur-[150px]" 
+              />
+              <div className="absolute inset-0 backdrop-blur-[2px]" />
             </div>
 
             <motion.div 
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="glass p-10 md:p-14 rounded-[4rem] max-w-md w-full relative z-10 text-center space-y-10 overflow-hidden"
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="glass p-12 md:p-20 rounded-[4rem] max-w-lg w-full relative z-10 text-center space-y-12 shadow-[0_32px_64px_-16px_rgba(255,77,109,0.15)]"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-romantic-red/50 to-transparent" />
-              
-              <div className="relative inline-block">
+              <div className="space-y-6">
                 <motion.div
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                  className="w-32 h-32 rounded-full ring-4 ring-romantic-pink/30 p-1 bg-white shadow-2xl mx-auto overflow-hidden group"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="w-24 h-24 rounded-3xl bg-romantic-red/5 flex items-center justify-center mx-auto mb-8 border border-romantic-red/10 animate-bounce-slow"
                 >
-                  <img 
-                    src="https://images.unsplash.com/photo-1596003906949-67221c37965c?q=80&w=1974" 
-                    className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700" 
-                    alt="Rose" 
-                  />
+                  <Lock className="text-romantic-red" size={40} strokeWidth={1.5} />
                 </motion.div>
-                <div className="absolute -bottom-2 -right-2 bg-white p-3 rounded-full shadow-lg border border-romantic-bg">
-                  <Lock className="text-romantic-red" size={20} />
+                <div className="space-y-2">
+                  <h1 className="text-5xl font-serif font-bold text-gray-900 tracking-tight">بوابة ندى</h1>
+                  <p className="text-romantic-red font-cursive text-2xl opacity-70 italic">رحلة الصبر والنجاح</p>
                 </div>
-              </div>
-
-              <div className="space-y-4">
-                <h1 className="text-4xl font-serif font-bold text-gray-900">مخزن ندى المُلهم</h1>
-                <p className="text-gray-500 font-sans italic text-sm leading-relaxed px-6">
-                  هذا المكان مخصص فقط لمن يقدر العزيمة والإصرار. أدخلي رمز الوصول لتكتشفي ما ينتظركِ.
+                <p className="text-gray-400 font-sans text-sm leading-relaxed px-10">
+                  أدخلي الرمز المميز لفتح مساحتك الخاصة المليئة بالإلهام والتشجيع.
                 </p>
               </div>
 
-              <form onSubmit={handleLogin} className="space-y-6">
-                <div className="relative group">
-                  <input
-                    type="text"
-                    value={accessCode}
-                    onChange={(e) => setAccessCode(e.target.value)}
-                    placeholder="رمز الوصول (يوم-شهر-سنة)"
-                    className={`w-full bg-white/60 border-2 ${loginError ? 'border-red-400 animate-shake' : 'border-romantic-pink/20'} rounded-2xl px-6 py-4 text-center text-xl font-serif tracking-[0.2em] focus:outline-none focus:border-romantic-red transition-all shadow-inner placeholder:text-gray-300 placeholder:tracking-normal placeholder:font-sans`}
-                  />
-                  {loginError && (
-                    <motion.p 
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-red-500 text-xs mt-2 font-bold"
-                    >
-                      الرمز غير صحيح، حاولي تاريخ مميز...
-                    </motion.p>
-                  )}
+              <form onSubmit={handleLogin} className="space-y-8">
+                <div className="space-y-4">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={accessCode}
+                      onChange={(e) => setAccessCode(e.target.value)}
+                      placeholder="5-5-2010"
+                      className={`w-full bg-romantic-bg/40 border ${loginError ? 'border-red-400 animate-shake' : 'border-romantic-pink/30'} rounded-3xl px-8 py-5 text-center text-2xl font-serif tracking-[0.3em] focus:outline-none focus:ring-4 focus:ring-romantic-pink/20 transition-all shadow-inner placeholder:text-gray-300 placeholder:tracking-normal placeholder:font-sans`}
+                    />
+                    {loginError && (
+                      <motion.p 
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-red-500 text-[10px] uppercase font-bold tracking-widest mt-3"
+                      >
+                        الرمز غير صحيح، حاولي تاريخاً مميزاً
+                      </motion.p>
+                    )}
+                  </div>
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, backgroundColor: '#ff1447' }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-romantic-red text-white py-4 rounded-2xl shadow-xl hover:shadow-romantic-red/30 transition-all font-bold tracking-widest flex items-center justify-center gap-3 group"
+                  className="w-full bg-romantic-red text-white py-5 rounded-3xl shadow-[0_12px_24px_-4px_rgba(255,77,109,0.4)] hover:shadow-[0_16px_32px_-4px_rgba(255,77,109,0.5)] transition-all font-bold tracking-[0.2em] uppercase text-sm flex items-center justify-center gap-3 overflow-hidden group relative"
                 >
-                  <span className="text-lg">فتح الخزنة</span>
-                  <Key size={20} className="group-hover:rotate-45 transition-transform" />
+                  <span className="relative z-10">فتح البوابة</span>
+                  <Key size={18} className="relative z-10 group-hover:rotate-45 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </motion.button>
               </form>
 
-              <div className="pt-4">
-                <p className="text-[10px] uppercase tracking-[0.4em] text-gray-300 font-bold">
-                  الحياة بقى لونها بمبي💗
-                </p>
+              <div className="pt-6">
+                <div className="flex items-center justify-center gap-3 opacity-20">
+                  <div className="h-[1px] w-8 bg-gray-400" />
+                  <Sparkles size={12} className="text-gray-400" />
+                  <div className="h-[1px] w-8 bg-gray-400" />
+                </div>
               </div>
             </motion.div>
             
             <motion.div
-              animate={{ opacity: [0.3, 0.6, 0.3] }}
-              transition={{ repeat: Infinity, duration: 3 }}
-              className="fixed bottom-10 text-romantic-red/40"
+              animate={{ opacity: [0.1, 0.4, 0.1] }}
+              transition={{ repeat: Infinity, duration: 4 }}
+              className="fixed bottom-12 uppercase tracking-[0.5em] text-[10px] text-gray-400 font-bold"
             >
-              <Sparkles size={32} />
+              الحياة بقى لونها بمبي💗
             </motion.div>
           </motion.div>
         ) : (
@@ -501,51 +530,95 @@ export default function App() {
 
             {/* HERO SECTION */}
             <MouseSparkles />
-            <section className="min-h-screen flex flex-col items-center justify-center relative p-6">
-              <div className="max-w-4xl w-full text-center z-10 space-y-8">
+            <section className="min-h-screen flex flex-col items-center justify-center relative p-6 mt-16">
+              <div className="absolute inset-0 pointer-events-none">
+                 <motion.div 
+                   animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                   transition={{ duration: 15, repeat: Infinity }}
+                   className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-romantic-pink/10 rounded-full blur-[100px]" 
+                 />
+                 <motion.div 
+                   animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
+                   transition={{ duration: 18, repeat: Infinity }}
+                   className="absolute bottom-1/4 -right-20 w-[700px] h-[700px] bg-romantic-red/5 rounded-full blur-[120px]" 
+                 />
+              </div>
+
+              <div className="max-w-6xl w-full text-center z-10 space-y-16">
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-4"
                 >
-                  <span className="text-romantic-red font-bold tracking-[0.3em] uppercase text-sm mb-4 block">أفضل شخصية مجتهدة</span>
-                  <h1 className="text-7xl md:text-9xl font-serif font-bold text-gray-900 mb-6 px-4">
-                    ندى
-                  </h1>
+                  <p className="text-romantic-red font-bold tracking-[0.6em] uppercase text-xs mb-8 block opacity-60">أفضل شخصية مجتهدة</p>
+                  <div className="relative inline-block">
+                    <h1 className="text-8xl md:text-[14rem] font-serif font-bold text-gray-900 tracking-tighter leading-[0.8] italic px-8">
+                       ندى
+                    </h1>
+                    <motion.div 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 1, type: "spring" }}
+                      className="absolute -top-12 -right-4 md:-top-20 md:right-0"
+                    >
+                      <Sparkles className="text-romantic-pink w-16 h-16 animate-pulse" />
+                    </motion.div>
+                  </div>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="glass p-10 rounded-[3rem] shadow-xl relative mt-12 bg-white/60"
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-romantic-red font-cursive text-4xl md:text-6xl italic opacity-80"
                 >
-                  <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mb-8">إجمالي السعي نحو التميز</p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    {[
-                      { label: 'أيام', value: totalDays },
-                      { label: 'ساعات', value: hours },
-                      { label: 'دقائق', value: minutes },
-                      { label: 'ثوانٍ', value: seconds },
-                    ].map((item) => (
-                      <div key={item.label} className="relative group">
-                        <div className="text-4xl md:text-6xl font-serif font-bold text-romantic-red tabular-nums">
-                          {item.value.toString().padStart(2, '0')}
+                  رحلة تميز لا تنتهي
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1 }}
+                  className="max-w-5xl mx-auto pt-12"
+                >
+                  <div className="glass p-10 md:p-16 rounded-[4rem] relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-romantic-pink/5 to-transparent pointer-events-none" />
+                    <p className="text-[10px] uppercase tracking-[0.5em] text-gray-400 font-bold mb-14">سجل السعي والإنجاز</p>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-4 relative z-10">
+                      {[
+                        { label: 'أيام السعي', value: totalDays, icon: Calendar },
+                        { label: 'ساعات الكفاح', value: hours, icon: RefreshCw },
+                        { label: 'دقائق الصبر', value: minutes, icon: Star },
+                        { label: 'ثواني الإنجاز', value: seconds, icon: Sparkles },
+                      ].map((item, idx) => (
+                        <div key={item.label} className="relative group/stat px-4">
+                          <item.icon size={16} className="mx-auto mb-4 text-romantic-pink/40" />
+                          <motion.div 
+                            initial={{ scale: 0.8 }}
+                            animate={{ scale: 1 }}
+                            className="text-5xl md:text-7xl font-serif font-bold text-gray-900 tabular-nums mb-3 tracking-tighter"
+                          >
+                            {item.value.toString().padStart(2, '0')}
+                          </motion.div>
+                          <div className="text-[10px] uppercase tracking-[0.3em] text-romantic-red font-bold opacity-60">{item.label}</div>
+                          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-romantic-red/20 group-hover/stat:w-12 transition-all duration-500" />
                         </div>
-                        <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-400 mt-2 font-bold">{item.label}</div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="pt-16 flex flex-col items-center text-gray-400 gap-2 cursor-pointer"
-                  onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+                  animate={{ y: [0, 20, 0] }}
+                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  className="pt-24 cursor-pointer group flex flex-col items-center"
+                  onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  <span className="text-xs uppercase tracking-widest font-bold">تعمقي في رسائل التشجيع</span>
-                  <ChevronDown size={20} />
+                  <p className="text-[9px] uppercase tracking-[0.6em] text-gray-300 font-bold group-hover:text-romantic-red transition-colors mb-6">اكتشفي مساركِ</p>
+                  <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-romantic-red group-hover:text-romantic-red transition-all duration-500 shadow-sm">
+                    <ChevronDown size={24} />
+                  </div>
                 </motion.div>
               </div>
             </section>
@@ -563,53 +636,54 @@ export default function App() {
             </section>
 
             {/* GALLERY SECTION */}
-            <section id="gallery" className="py-32 px-6 bg-white/30 backdrop-blur-sm">
-              <SectionHeading subtitle="الحياة بقى لونها بمبي💗">معرض الورود الملهم</SectionHeading>
+            <section id="gallery" className="py-40 px-6 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-romantic-pink/5 blur-[100px] pointer-events-none" />
+              <SectionHeading subtitle="جمال الإصرار">لحظات من الإلهام</SectionHeading>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
                 {[
                   {
                     src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2069",
                     caption: "الجمال يكمن في التفاصيل الصغيرة.",
-                    loc: "عالم الورود"
+                    loc: "عالم الورود",
+                    size: "md:col-span-2 lg:col-span-1 h-[400px]"
                   },
                   {
                     src: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=1974",
                     caption: "كوني كالأزهار، تنمو برقة في كل الظروف.",
-                    loc: "حديقة التفاؤل"
+                    loc: "حديقة التفاؤل",
+                    size: "h-[500px]"
                   },
                   {
                     src: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=2070",
                     caption: "وردة واحدة قد تكون بداية ربيع جديد.",
-                    loc: "أمل متجدد"
+                    loc: "أمل متجدد",
+                    size: "h-[450px]"
                   }
                 ].map((photo, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ y: -10 }}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ y: -15, rotate: i % 2 === 0 ? 1 : -1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.2 }}
-                    className="group"
+                    transition={{ duration: 0.8, delay: i * 0.2 }}
+                    className={`relative group ${photo.size}`}
                   >
-                    <div className="bg-white p-4 rounded-b-none rounded-t-[2rem] shadow-lg overflow-hidden">
-                      <div className="aspect-[4/5] overflow-hidden rounded-2xl relative">
-                        <img 
-                          src={photo.src} 
-                          alt="Pink Rose" 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-romantic-pink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="w-full h-full rounded-[3rem] overflow-hidden shadow-2xl relative">
+                      <img 
+                        src={photo.src} 
+                        alt="Aesthetic" 
+                        className="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-110" 
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end h-1/2">
+                         <div className="flex items-center gap-2 text-romantic-pink mb-3">
+                           <MapPin size={10} />
+                           <span className="text-[9px] uppercase font-bold tracking-[0.4em]">{photo.loc}</span>
+                         </div>
+                         <p className="text-white font-serif italic text-lg leading-relaxed">{photo.caption}</p>
                       </div>
-                    </div>
-                    <div className="bg-white p-6 rounded-t-none rounded-b-[2rem] shadow-lg border-t border-romantic-bg">
-                      <div className="flex items-center gap-2 text-romantic-red mb-2">
-                        <MapPin size={12} />
-                        <span className="text-[10px] uppercase font-bold tracking-widest">{photo.loc}</span>
-                      </div>
-                      <p className="font-serif italic text-gray-700">{photo.caption}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -617,34 +691,44 @@ export default function App() {
             </section>
 
             {/* COMPLIMENT BOX */}
-            <section className="py-20 px-6">
-              <div className="max-w-2xl mx-auto glass rounded-[2.5rem] p-12 text-center relative overflow-hidden group">
-                <div className="absolute -top-12 -right-12 w-32 h-32 bg-romantic-pink/10 rounded-full blur-2xl group-hover:bg-romantic-pink/20 transition-colors" />
-                <Gift className="mx-auto text-romantic-red mb-6" size={40} />
-                <h3 className="text-2xl font-serif font-bold text-gray-800 mb-2">كلمة تشجيعية لكِ</h3>
-                <p className="text-romantic-red font-cursive text-xl mb-8">اضغطي لمزيد من التفاؤل</p>
+            <section className="py-40 px-6 relative bg-white/40">
+              <div className="max-w-4xl mx-auto glass rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden group shadow-2xl border-white/40">
+                <div className="absolute -top-12 -right-12 w-48 h-48 bg-romantic-pink/10 rounded-full blur-3xl group-hover:bg-romantic-pink/20 transition-all duration-1000" />
+                <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-romantic-red/5 rounded-full blur-2xl" />
+                
+                <motion.div 
+                  initial={{ scale: 0.8 }}
+                  whileInView={{ scale: 1 }}
+                  className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-romantic-red/5 text-romantic-red mb-12"
+                >
+                  <Gift size={32} strokeWidth={1} />
+                </motion.div>
+                
+                <h3 className="text-sm font-bold text-romantic-red tracking-[0.5em] uppercase mb-4 opacity-60">هدية معنوية</h3>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-12 leading-tight">كلمات تشجيعية لنبض قلبكِ</h2>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentCompliment}
-                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 1.1, y: -10 }}
-                    className="min-h-[80px] flex items-center justify-center"
+                    initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    className="min-h-[120px] flex items-center justify-center p-8 bg-romantic-red/5 rounded-[2.5rem] border border-romantic-red/10 mb-12"
                   >
-                    <p className="text-xl font-serif italic text-gray-700 leading-relaxed">
+                    <p className="text-2xl md:text-3xl font-serif italic text-gray-800 leading-normal max-w-2xl mx-auto">
                       "{compliments[currentCompliment]}"
                     </p>
                   </motion.div>
                 </AnimatePresence>
 
                 <motion.button
-                  whileHover={{ rotate: 180 }}
+                  whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={nextCompliment}
-                  className="mt-10 p-4 bg-romantic-red text-white rounded-full shadow-lg hover:shadow-romantic-red/40 transition-all"
+                  className="p-6 bg-romantic-red text-white rounded-2xl shadow-xl hover:shadow-romantic-red/50 transition-all active:scale-95"
                 >
-                  <RefreshCw size={24} />
+                  <RefreshCw size={28} />
                 </motion.button>
               </div>
             </section>
@@ -656,68 +740,93 @@ export default function App() {
             </section>
 
             {/* LETTER & INTERACTIVE MESSAGES */}
-            <section id="letter" className="py-32 px-6 max-w-4xl mx-auto">
-              <div className="glass rounded-[3rem] p-10 md:p-16 relative overflow-hidden">
-                <Quote className="absolute top-8 right-8 text-romantic-pink/20" size={80} />
+            <section id="letter" className="py-40 px-6 max-w-5xl mx-auto">
+              <motion.div 
+                whileInView={{ y: 0, opacity: 1 }}
+                initial={{ y: 50, opacity: 0 }}
+                viewport={{ once: true }}
+                className="glass rounded-[4rem] p-12 md:p-24 relative overflow-hidden shadow-[0_48px_80px_-16px_rgba(255,77,109,0.1)]"
+              >
+                <Quote className="absolute top-12 right-12 text-romantic-pink/10" size={120} />
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-romantic-pink via-romantic-red to-romantic-pink opacity-20" />
                 
-                <div className="relative z-10 text-center space-y-8">
-                  <h2 className="text-4xl font-serif font-bold text-gray-900 italic">إلى ندى،</h2>
-                  <div className="text-lg text-gray-700 font-serif leading-relaxed italic max-w-3xl mx-auto text-justify space-y-4">
-                    <p>أنا حابب أقولك حاجة من غير مقدمات كتير، واضح جدًا إنك بتشيلي مسؤولية كبيرة سواء في الشغل أو الدراسة، وده مش سهل خالص على أي حد، وخصوصا في الفترة اللي كلها ضغط دي.</p>
+                <div className="relative z-10 space-y-16">
+                  <div className="text-center space-y-4">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      className="w-16 h-16 bg-romantic-red/5 rounded-2xl flex items-center justify-center mx-auto text-romantic-red mb-6"
+                    >
+                      <Heart size={32} />
+                    </motion.div>
+                    <h2 className="text-5xl font-serif font-bold text-gray-900 italic tracking-tight">إلى ندى،</h2>
+                    <div className="h-[1px] w-24 bg-romantic-red/20 mx-auto" />
+                  </div>
+
+                  <div className="text-xl md:text-2xl text-gray-700 font-serif leading-[1.8] italic max-w-4xl mx-auto text-justify space-y-8 antialiased">
+                    <p className="bg-gradient-to-r from-romantic-red/5 to-transparent p-4 rounded-xl border-r-2 border-romantic-red/20">أنا حابب أقولك حاجة من غير مقدمات كتير، واضح جدًا إنك بتشيلي مسؤولية كبيرة سواء في الشغل أو الدراسة، وده مش سهل خالص على أي حد، وخصوصا في الفترة اللي كلها ضغط دي.</p>
                     <p>بس في نفس الوقت ده بيقول حاجة مهمة جدًا عنك، إنك شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا.</p>
-                    <p>وعارف إن الجمع بين الشغل والمذاكرة خصوصًا وقت الامتحانات بيبقى مرهق جدًا وممكن يخلي الواحد يحس إنه مش لاحق على حاجة أو إن كل حاجة متراكمة فوق دماغه، بس صدقيني الإحساس ده طبيعي جدًا وكل الناس اللي بتجتهد بتمر بيه في مرحلة معينة.</p>
+                    <p className="text-gray-900 font-bold not-italic">وعارف إن الجمع بين الشغل والمذاكرة خصوصًا وقت الامتحانات بيبقى مرهق جدًا وممكن يخلي الواحد يحس إنه مش لاحق على حاجة أو إن كل حاجة متراكمة فوق دماغه، بس صدقيني الإحساس ده طبيعي جدًا وكل الناس اللي بتجتهد بتمر بيه في مرحلة معينة.</p>
                     <p>والفرق الحقيقي بيكون في إنك مكملة رغم كل ده وموقفتيش، وده اللي بيخليكي في الآخر توصلي للي انتي عايزاه، فحاولي تاخدي كل حاجة واحدة واحدة من غير ما تضغطي على نفسك زيادة عن اللزوم، ومش لازم كل حاجة تبقى بيرفكت طول الوقت.</p>
-                    <p>المهم إنك بتتحركي لقدام حتى لو بخطوات صغيرة، وافتكري دايمًا إن أي تعب أو ضغط دلوقتي هو فترة وهتعدي، والنتيجة اللي بعدها هي اللي هتخليكي تنسي كل التعب ده وكملي حتى لو شغلك متعب او مرهق في وقت من الأوقات كل ما تحسي صبرك خلص من الشغل ده افتكري إنك لسه لك خطوات بسيطة وتوصلي لحلمك.</p>
+                    <p className="bg-romantic-pink/5 p-6 rounded-[2rem] border border-romantic-pink/10">المهم إنك بتتحركي لقدام حتى لو بخطوات صغيرة، وافتكري دايمًا إن أي تعب أو ضغط دلوقتي هو فترة وهتعدي، والنتيجة اللي بعدها هي اللي هتخليكي تنسي كل التعب ده وكملي حتى لو شغلك متعب او مرهق في وقت من الأوقات كل ما تحسي صبرك خلص من الشغل ده افتكري إنك لسه لك خطوات بسيطة وتوصلي لحلمك.</p>
                     <p>وكمان متنسيش تدي لنفسك حقها في الراحة حتى لو وقت بسيط، علشان تقدري ترجعي تكملي بنفس الطاقة، لأن الاستمرار محتاج توازن مش ضغط بس، وأنا متأكد إنك قدها وهتعدي الفترة دي بشكل كويس جدًا وهتفرحي بنفسك وبكل اللي عملتيه.</p>
-                    <p>وإن شاء الله الأيام الجاية تكون أخف عليكي وفيها راحة ونتايج حلوة تليق بكل المجهود اللي بتعمليه ودايما متنسيش، الحياة بقى لونها بمبي 😂💗</p>
+                    <p className="text-center text-romantic-red text-3xl font-cursive mt-12 block transform hover:scale-110 transition-transform duration-500 cursor-default">وإن شاء الله الأيام الجاية تكون أخف عليكي وفيها راحة ونتايج حلوة تليق بكل المجهود اللي بتعمليه ودايما متنسيش، الحياة بقى لونها بمبي 😂💗</p>
                   </div>
                   
-                  <div className="pt-12 border-t border-romantic-pink/20">
-                    <h3 className="text-romantic-red font-bold uppercase tracking-widest text-xs mb-8 flex items-center justify-center gap-2">
-                      <MessageSquareHeart size={16} />
-                      اتركي بصمتكِ الإيجابية
-                    </h3>
+                  <div className="pt-20 border-t border-romantic-pink/10 text-center">
+                    <div className="inline-flex items-center gap-2 px-6 py-2 bg-romantic-red/5 rounded-full text-romantic-red font-bold uppercase tracking-[0.4em] text-[10px] mb-12">
+                      <MessageSquareHeart size={14} />
+                      رسائل من القلب
+                    </div>
                     
-                    <form onSubmit={sendMessage} className="flex gap-4 max-w-md mx-auto mb-12">
+                    <form onSubmit={sendMessage} className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto mb-16 px-4">
                       <input
                         type="text"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
-                        placeholder="اكتبي ملاحظة تشجيعية..."
-                        className="flex-1 bg-white/50 border border-romantic-pink/30 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-romantic-pink transition-all font-sans"
+                        placeholder="اكتبي كلمة تشجيعية هنا..."
+                        className="flex-1 bg-white/40 border border-romantic-pink/20 rounded-[2rem] px-8 py-5 focus:outline-none focus:ring-4 focus:ring-romantic-pink/10 transition-all font-sans text-lg placeholder:text-gray-300"
                       />
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-romantic-red text-white p-4 rounded-2xl shadow-lg hover:shadow-romantic-red/30 transition-all font-sans"
+                        whileHover={{ scale: 1.02, backgroundColor: '#ff1447' }}
+                        whileTap={{ scale: 0.98 }}
+                        className="bg-romantic-red text-white px-10 py-5 rounded-[2rem] shadow-xl hover:shadow-romantic-red/40 transition-all font-bold group flex items-center justify-center gap-2"
                       >
-                        <Send size={20} />
+                        <span>إرسال</span>
+                        <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </motion.button>
                     </form>
 
-                    <div className="space-y-4 max-h-[400px] overflow-y-auto px-4 custom-scrollbar">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto px-6 py-4 custom-scrollbar">
                       <AnimatePresence initial={false}>
-                        {messages.map((msg) => (
+                        {messages.map((msg, idx) => (
                           <motion.div
                             key={msg.id}
-                            initial={{ opacity: 0, x: -20, scale: 0.9 }}
-                            animate={{ opacity: 1, x: 0, scale: 1 }}
-                            className="bg-white/80 p-5 rounded-2xl shadow-sm text-right border-r-4 border-romantic-red"
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ delay: idx * 0.05 }}
+                            className="bg-white/60 backdrop-blur-md p-8 rounded-[2.5rem] shadow-sm text-right border border-white/50 hover:border-romantic-red/20 transition-all group"
                           >
-                            <p className="text-gray-700 font-sans">{msg.text}</p>
-                            <span className="text-[10px] text-gray-400 mt-2 block uppercase tracking-wider">
-                               أُرسلت الساعة {format(msg.timestamp, 'p')}
-                            </span>
+                            <p className="text-gray-700 font-serif italic text-lg leading-relaxed mb-4 group-hover:text-gray-900 transition-colors">"{msg.text}"</p>
+                            <div className="flex items-center justify-end gap-2 opacity-40">
+                               <Clock size={10} />
+                               <span className="text-[9px] font-bold uppercase tracking-widest">
+                                  {format(msg.timestamp, 'p')}
+                               </span>
+                            </div>
                           </motion.div>
                         ))}
                       </AnimatePresence>
                       {messages.length === 0 && (
-                        <p className="text-gray-400 italic text-sm font-serif">لا توجد رسائل هنا بعد. الحياة بقى لونها بمبي💗</p>
+                        <div className="col-span-full py-20 text-gray-300 italic flex flex-col items-center gap-4">
+                           <Sparkles size={40} className="opacity-20" />
+                           <p className="tracking-[0.2em] uppercase text-[10px] font-bold">لا توجد رسائل ملهمة هنا بعد</p>
+                        </div>
                       )}
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </section>
 
             {/* FOOTER */}

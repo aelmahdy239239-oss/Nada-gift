@@ -1,34 +1,51 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500&family=Tajawal:wght@300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;700&family=Tajawal:wght@300;400;500;700;800&display=swap');
 
 @theme {
-  --font-sans: "Tajawal", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Amiri", serif;
+  --font-sans: "Inter", "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
   --font-cursive: "Dancing Script", cursive;
-  --color-romantic-red: #ff748c;
-  --color-romantic-pink: #ffafbd;
-  --color-romantic-bg: #fff5f6;
+  --color-romantic-red: #ff4d6d;
+  --color-romantic-pink: #ff85a1;
+  --color-romantic-cream: #fff5f6;
+  --color-romantic-bg: #fffcfc;
 }
 
 body {
-  @apply bg-[#fff5f6] text-gray-800 antialiased overflow-x-hidden;
+  @apply bg-romantic-bg text-gray-900 antialiased overflow-x-hidden;
   direction: rtl;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%23ff748c"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
 }
 
 .glass {
-  @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(255,175,189,0.2)];
+  @apply bg-white/40 backdrop-blur-2xl border border-white/20 shadow-[0_4px_24px_-1px_rgba(255,77,109,0.1)];
+}
+
+.glass-dark {
+  @apply bg-black/5 backdrop-blur-2xl border border-black/5 shadow-none;
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #ff4d6d, #ff85a1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-romantic-red to-romantic-pink;
+}
+
+/* Custom noise texture for background depth */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* Custom Styles */
 .timeline-line {
-  background: linear-gradient(to bottom, #ffccd5, #ff4d6d, #ffccd5);
+  @apply bg-gradient-to-b from-romantic-pink/20 via-romantic-red/50 to-romantic-pink/20;
 }
 
 @keyframes shake {
@@ -42,5 +59,9 @@ body {
 }
 
 ::selection {
-  @apply bg-romantic-pink/30 text-romantic-red;
+  @apply bg-romantic-red/20 text-romantic-red;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
 }

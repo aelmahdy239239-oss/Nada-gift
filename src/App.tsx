@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
-import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target } from 'lucide-react';
+import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target, Lock, Key } from 'lucide-react';
 import { format, differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import confetti from 'canvas-confetti';
 
@@ -60,11 +60,10 @@ const LoveQuest = () => {
 
   const spawnHeart = useCallback(() => {
     const id = Date.now() + Math.random();
-    const x = 10 + Math.random() * 80; // 10% to 90%
+    const x = 10 + Math.random() * 80;
     const y = 10 + Math.random() * 80;
     setHearts(prev => [...prev, { id, x, y }]);
     
-    // Remove heart if not clicked after 3 seconds
     setTimeout(() => {
       setHearts(prev => prev.filter(h => h.id !== id));
     }, 2000);
@@ -93,14 +92,12 @@ const LoveQuest = () => {
     setScore(prev => prev + 1);
     setHearts(prev => prev.filter(h => h.id !== id));
     
-    const words = ["حب", "سحر", "للأبد", "ابتسامة", "جمال", "لطف", "توأم روح", "مستقبل", "أمل", "سعادة"];
+    const words = ["نجاح", "إصرار", "قوة", "فخر", "طموح", "صبر", "إنجاز", "مستقبل", "أمل", "سعادة"];
     const word = words[score % words.length];
     
-    // Mini word animation
     const el = document.createElement('div');
     el.innerText = word;
     el.className = "fixed pointer-events-none font-sans text-2xl text-romantic-red font-bold z-[70] transition-all duration-1000 opacity-0 transform -translate-y-10";
-    // Positioning should be absolute relative to viewport if we had mouse coords, but let's just show it near center
     el.style.left = "50%";
     el.style.top = "50%";
     document.body.appendChild(el);
@@ -119,9 +116,9 @@ const LoveQuest = () => {
       {!gameStarted ? (
         <div className="text-center space-y-6">
           <Gamepad2 className="mx-auto text-romantic-red" size={48} />
-          <h3 className="text-3xl font-serif font-bold text-gray-800">صائدة القلوب</h3>
+          <h3 className="text-3xl font-serif font-bold text-gray-800">مهمة النجاح</h3>
           <p className="text-gray-500 max-w-md mx-auto">
-            اصطادي 10 قلوب سحرية لتكشفي عن رسالتي السرية لكِ. هل أنت مستعدة يا حبيبتي؟
+            التقطي 10 أهداف لتكشفي عن رسالتي التي تفخر بكِ. هل أنت مستعدة يا ندى؟ الحياة بقى لونها بمبي💗
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -129,7 +126,7 @@ const LoveQuest = () => {
             onClick={() => setGameStarted(true)}
             className="bg-romantic-red text-white px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-romantic-red/40"
           >
-            ابدئي المهمة
+            ابدئي الآن
           </motion.button>
         </div>
       ) : showPrize ? (
@@ -140,9 +137,9 @@ const LoveQuest = () => {
         >
           <div className="bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-romantic-pink">
              <Trophy className="mx-auto text-yellow-500 mb-4" size={50} />
-             <h3 className="text-4xl font-serif font-bold text-romantic-red mb-4">لقد فزتِ بقلبي!</h3>
+             <h3 className="text-4xl font-serif font-bold text-romantic-red mb-4">فخور بكِ دائماً!</h3>
              <p className="text-xl font-serif italic text-gray-700 leading-relaxed">
-               "ببراعة فائقة، التقطتِ كل ذرة من حبي. لكن الحقيقة هي أنني سلمتُه لكِ منذ اليوم الأول. أنتِ لا تصطادين القلوب فحسب؛ بل تجعلينها تخفق بشدة. أحبكِ أكثر مما يمكن للكلمات وصفه."
+               "أنتِ شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا. كملي وحلمك قرب يتحقق.. الحياة بقى لونها بمبي💗"
              </p>
              <button 
                 onClick={() => {setScore(0); setGameStarted(false); setShowPrize(false);}}
@@ -155,10 +152,10 @@ const LoveQuest = () => {
       ) : (
         <>
           <div className="absolute top-6 left-6 flex items-center gap-2">
-            <Heart className="text-romantic-red fill-romantic-red" size={20} />
+            <Star className="text-romantic-red fill-romantic-red" size={20} />
             <span className="font-bold text-xl text-romantic-red">{score} / 10</span>
           </div>
-          <p className="absolute top-6 right-6 text-gray-400 text-sm italic">التقطيهم بسرعة!</p>
+          <p className="absolute top-6 right-6 text-gray-400 text-sm italic">اصطادي النجاح!</p>
           
           <AnimatePresence>
             {hearts.map(h => (
@@ -171,7 +168,7 @@ const LoveQuest = () => {
                 className="absolute p-3 text-romantic-red cursor-pointer hover:scale-125 transition-transform"
                 onClick={() => catchHeart(h.id)}
               >
-                <Heart className="fill-romantic-red shadow-lg" size={32} />
+                <Sparkles className="fill-romantic-red shadow-lg" size={32} />
               </motion.button>
             ))}
           </AnimatePresence>
@@ -188,7 +185,7 @@ const LoveQuest = () => {
 };
 
 const DriftingPetals = () => {
-  const [petals, setPetals] = useState<{ id: number; left: string; size: number; duration: number; delay: number }[]>([]);
+  const [petals, setPetals] = useState<{ id: number; left: string; size: number; duration: number; delay: number; xOffset: number }[]>([]);
 
   useEffect(() => {
     const newPetals = Array.from({ length: 25 }).map((_, i) => ({
@@ -196,7 +193,8 @@ const DriftingPetals = () => {
       left: `${Math.random() * 100}%`,
       size: Math.random() * (25 - 15) + 15,
       duration: Math.random() * (20 - 10) + 10,
-      delay: Math.random() * 10,
+      delay: Math.random() * -20, // Negative delay to start immediately at different positions
+      xOffset: Math.random() * 100 - 50,
     }));
     setPetals(newPetals);
   }, []);
@@ -204,18 +202,30 @@ const DriftingPetals = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {petals.map((p) => (
-        <div
+        <motion.div
           key={p.id}
-          className="petal text-romantic-pink/40"
+          initial={{ opacity: 0, y: "-10vh", x: 0, rotate: 0 }}
+          animate={{ 
+            opacity: [0, 0.4, 0.4, 0],
+            y: "110vh",
+            x: [0, p.xOffset, p.xOffset * 1.5],
+            rotate: [0, 180, 360]
+          }}
+          transition={{
+            duration: p.duration,
+            delay: p.delay,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute"
           style={{
             left: p.left,
             fontSize: `${p.size}px`,
-            animationDuration: `${p.duration}s`,
-            animationDelay: `${p.delay}s`,
+            color: 'rgba(255, 175, 189, 0.4)'
           }}
         >
           🌸
-        </div>
+        </motion.div>
       ))}
     </div>
   );
@@ -253,7 +263,7 @@ const SectionHeading = ({ children, subtitle }: { children: React.ReactNode; sub
       {subtitle && <p className="text-romantic-red font-cursive text-2xl">{subtitle}</p>}
       <div className="flex items-center justify-center gap-4 mt-6">
         <div className="h-[2px] w-12 bg-romantic-pink/30" />
-        <Heart className="text-romantic-red fill-romantic-red" size={16} />
+        <Star className="text-romantic-red fill-romantic-red" size={16} />
         <div className="h-[2px] w-12 bg-romantic-pink/30" />
       </div>
     </motion.div>
@@ -264,22 +274,22 @@ const SectionHeading = ({ children, subtitle }: { children: React.ReactNode; sub
 
 export default function App() {
   const [isOpened, setIsOpened] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [accessCode, setAccessCode] = useState('');
+  const [loginError, setLoginError] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [currentCompliment, setCurrentCompliment] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
+  
   const compliments = [
-    "الطريقة التي تلمع بها عيناكِ عندما تكونين متحمسة.",
-    "لطفكِ المعهود تجاه كل من تقابلينه.",
-    "الطريقة التي تجعلين بها أبسط اللحظات تبدو كأنها سحر.",
-    "قوتكِ المذهلة وصمودكِ الرائع.",
-    "الطريقة التي تعرفين بها دائماً ما تقولينه لتجعليني أبتسم.",
-    "شغفكِ الكبير بالأشياء التي تحبينها.",
-    "دفء يدكِ وهي في يدي.",
-    "كم تبدين جميلة عندما تستيقظين للتو.",
-    "ضحكتكِ، هي أغنيتي المفضلة دائماً."
+    "أنتِ أقوى مما تتخيلين يا ندى.",
+    "فخور بكل خطوة تخطينها في حياتكِ.",
+    "تذكري دائماً أنكِ قادرة على تحقيق المستحيل.",
+    "الشغل والمذاكرة ضغط كبير، لكنكِ قدها وقدود.",
+    "الحياة بقى لونها بمبي💗",
+    "ابتسامتكِ هي سر سعادتنا جميعاً.",
+    "استمري في السعي، حلمكِ يستحق كل هذا التعب.",
+    "أنتِ لستِ وحدكِ، أنا دائماً هنا لأدعمكِ.",
+    "أنتِ النسخة الأفضل من نفسكِ كل يوم."
   ];
 
   const nextCompliment = () => {
@@ -287,7 +297,7 @@ export default function App() {
     confetti({
       particleCount: 15,
       scalar: 0.7,
-      colors: ['#ff4d6d']
+      colors: ['#ffafbd']
     });
   };
   
@@ -304,24 +314,25 @@ export default function App() {
   const minutes = differenceInMinutes(now, anniversaryDate) % 60;
   const seconds = differenceInSeconds(now, anniversaryDate) % 60;
 
-  const toggleMusic = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // The code is 5-5-2010
+    if (accessCode.trim() === '5-5-2010' || accessCode.trim() === '05-05-2010' || accessCode.trim() === '5/5/2010') {
+      setIsOpened(true);
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff748c', '#ffafbd', '#fff5f6']
+      });
     } else {
-      audioRef.current.play();
+      setLoginError(true);
+      setTimeout(() => setLoginError(false), 2000);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleOpen = () => {
-    setIsOpened(true);
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#ff4d6d', '#ff85a1', '#ffccd5']
-    });
+    // This function can be kept if we still want a fallback, but the form handles it now.
   };
 
   const sendMessage = (e: React.FormEvent) => {
@@ -337,71 +348,137 @@ export default function App() {
     setMessages([newMessage, ...messages]);
     setInputText('');
     
-    // Celebration for sending a heart
     confetti({
       particleCount: 20,
       spread: 40,
       origin: { y: 0.9 },
-      colors: ['#ff4d6d']
+      colors: ['#ff748c']
     });
   };
 
   const timelineData = [
-    { date: '5 مايو 2010', title: 'الشرارة الأولى', description: "اليوم الذي بدأت فيه رحلتنا. لحظة غيرت كل شيء للأبد.", icon: Sparkles },
-    { date: '14 فبراير 2011', title: 'موعدنا الأول', description: "فراشات في المعدة وابتسامات خجولة. كانت بداية مثالية.", icon: Heart },
-    { date: '10 يونيو 2015', title: 'ذكريات الصيف', description: "تلك النزهات الطويلة والمحادثات التي لا تنتهي تحت أشعة الشمس.", icon: Camera },
-    { date: '25 ديسمبر 2020', title: 'أول عطلة معاً', description: "خلق تقاليدنا الخاصة والاحتفال معاً.", icon: Star },
-  ];
+    { year: 2010, title: "بداية الرحلة", description: "بداية رحلة الحياة المليئة بالأمل والفرص الواعدة. الحياة بقى لونها بمبي💗", icon: Star },
+    { year: 2011, title: "خطوات واثقة", description: "خطوة جديدة نحو النجاح وبداية استكشاف مواهبكِ الكامنة.", icon: Star },
+    { year: 2012, title: "قوة ومثابرة", description: "هنا تثبتين أنكِ قوية ومثابرة في كل تفاصيل حياتكِ اليومية.", icon: Star },
+    { year: 2013, title: "الإصرار ينمو", description: "الإصرار ينمو معكِ، والحلم يصبح أقرب يوماً بعد يوم بفضل اجتهادكِ.", icon: Star },
+    { year: 2014, title: "طموح بلا حدود", description: "طموحكِ لا حدود له، والقادم دائماً أجمل بإذن الله لمن يسعى مثلكِ.", icon: Star },
+    { year: 2015, title: "تحدي الصعاب", description: "تخطين الصعاب برقة الورد وقوة الجبال، فخور جداً بمجهودكِ المميز.", icon: Star },
+    { year: 2016, title: "بصمة نجاح", description: "كل مجهود تبذلينه هو بصمة نجاح حقيقية في طريقكِ المشرق نحو التميز.", icon: Star },
+    { year: 2017, title: "ثقة بالنفس", description: "ثقتكِ بنفسكِ هي وقودكِ الحقيقي للوصول إلى أعلى القمم التي تطمحين إليها.", icon: Star },
+    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه. الحياة بقى لونها بمبي💗", icon: Star },
+    { year: 2019, title: "السعي المستمر", description: "استمري في السعي والمثابرة، فالنجاح يليق بكِ تماماً وبشخصيتكِ القوية.", icon: Star },
+    { year: 2020, title: "سنة التحديات", description: "سنة التحديات الكبرى التي أثبتتِ فيها للعالم أنكِ أقوى من أي ظرف صعب.", icon: Star },
+    { year: 2021, title: "إشراق دائم", description: "إشراقكِ الدائم وطاقتكِ يمنحان الجميع إلهاماً لا ينتهي للسعي والعمل.", icon: Star },
+    { year: 2022, title: "ذكاء وطموح", description: "الذكاء والطموح يجتمعان فيكِ ليرسما ملامح مستقبلكِ الباهر والناجح.", icon: Star },
+    { year: 2023, title: "تغلب على العقبات", description: "كل عقبة تغلبتِ عليها هي في الحقيقة قصة نجاح ملهمة تضاف إلى رصيدكِ.", icon: Star },
+    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل، وفعلاً الحياة بقى لونها بمبي💗", icon: Star },
+    { year: 2025, title: "قرب الحلم", description: "تقتربين من حلمكِ الكبير بخطوات واثقة، هادئة، ومدروسة كعادتكِ دائماً.", icon: Star },
+    { year: 2026, title: "فخر بالمستقبل", description: "فخور بكل ما وصلتِ إليه اليوم وبكل الإنجازات التي ستحققينها غداً.", icon: Star },
+  ].map(item => ({
+    date: `عام ${item.year}`,
+    title: item.title,
+    description: item.description,
+    icon: item.icon
+  }));
 
   return (
     <div className="min-h-screen relative bg-romantic-bg selection:bg-romantic-pink/30">
       <DriftingPetals />
 
-      <audio
-        ref={audioRef}
-        loop
-        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-      />
-
       <AnimatePresence mode="wait">
         {!isOpened ? (
           <motion.div
-            key="opening"
+            key="login"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-white"
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 bg-romantic-bg"
           >
-            <motion.div
-              animate={{ 
-                scale: [1, 1.05, 1],
-                rotate: [0, 2, -2, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="relative mb-12"
+            <div className="absolute inset-0 z-0 opacity-30">
+              <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-romantic-pink rounded-full blur-[120px] animate-pulse" />
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-romantic-red/20 rounded-full blur-[150px] animate-pulse delay-1000" />
+            </div>
+
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="glass p-10 md:p-14 rounded-[4rem] max-w-md w-full relative z-10 text-center space-y-10 overflow-hidden"
             >
-              <motion.button
-                onClick={handleOpen}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative w-48 h-48 flex items-center justify-center cursor-pointer group"
-              >
-                <Heart className="w-full h-full text-romantic-red fill-romantic-red drop-shadow-2xl" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-serif text-3xl font-bold tracking-widest group-hover:scale-110 transition-transform">إلى ندى</span>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-romantic-red/50 to-transparent" />
+              
+              <div className="relative inline-block">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.05, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                  className="w-32 h-32 rounded-full ring-4 ring-romantic-pink/30 p-1 bg-white shadow-2xl mx-auto overflow-hidden group"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1596003906949-67221c37965c?q=80&w=1974" 
+                    className="w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700" 
+                    alt="Rose" 
+                  />
+                </motion.div>
+                <div className="absolute -bottom-2 -right-2 bg-white p-3 rounded-full shadow-lg border border-romantic-bg">
+                  <Lock className="text-romantic-red" size={20} />
                 </div>
-                <div className="absolute -inset-8 bg-romantic-pink/20 rounded-full blur-3xl -z-10 animate-pulse" />
-              </motion.button>
+              </div>
+
+              <div className="space-y-4">
+                <h1 className="text-4xl font-serif font-bold text-gray-900">مخزن ندى المُلهم</h1>
+                <p className="text-gray-500 font-sans italic text-sm leading-relaxed px-6">
+                  هذا المكان مخصص فقط لمن يقدر العزيمة والإصرار. أدخلي رمز الوصول لتكتشفي ما ينتظركِ.
+                </p>
+              </div>
+
+              <form onSubmit={handleLogin} className="space-y-6">
+                <div className="relative group">
+                  <input
+                    type="text"
+                    value={accessCode}
+                    onChange={(e) => setAccessCode(e.target.value)}
+                    placeholder="رمز الوصول (يوم-شهر-سنة)"
+                    className={`w-full bg-white/60 border-2 ${loginError ? 'border-red-400 animate-shake' : 'border-romantic-pink/20'} rounded-2xl px-6 py-4 text-center text-xl font-serif tracking-[0.2em] focus:outline-none focus:border-romantic-red transition-all shadow-inner placeholder:text-gray-300 placeholder:tracking-normal placeholder:font-sans`}
+                  />
+                  {loginError && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 text-xs mt-2 font-bold"
+                    >
+                      الرمز غير صحيح، حاولي تاريخ مميز...
+                    </motion.p>
+                  )}
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  className="w-full bg-romantic-red text-white py-4 rounded-2xl shadow-xl hover:shadow-romantic-red/30 transition-all font-bold tracking-widest flex items-center justify-center gap-3 group"
+                >
+                  <span className="text-lg">فتح الخزنة</span>
+                  <Key size={20} className="group-hover:rotate-45 transition-transform" />
+                </motion.button>
+              </form>
+
+              <div className="pt-4">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-gray-300 font-bold">
+                  الحياة بقى لونها بمبي💗
+                </p>
+              </div>
             </motion.div>
             
-            <div className="text-center space-y-4 max-w-sm">
-              <h1 className="text-5xl font-serif font-bold text-gray-900 leading-tight">
-                حب <span className="text-romantic-red">يزدهر</span> دائماً
-              </h1>
-              <p className="text-gray-400 font-sans italic text-lg">
-                قلبكِ يخفي سراً ينتظركِ في الداخل...
-              </p>
-            </div>
+            <motion.div
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ repeat: Infinity, duration: 3 }}
+              className="fixed bottom-10 text-romantic-red/40"
+            >
+              <Sparkles size={32} />
+            </motion.div>
           </motion.div>
         ) : (
           <motion.div
@@ -413,11 +490,11 @@ export default function App() {
             {/* STICKY NAV */}
             <nav className="fixed top-0 left-0 right-0 z-50 p-4 pointer-events-none">
               <div className="max-w-max mx-auto glass px-6 py-3 rounded-full flex items-center gap-6 pointer-events-auto">
-                <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-romantic-red hover:scale-110 transition-transform"><Heart size={20}/></button>
+                <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-romantic-red hover:scale-110 transition-transform"><Star size={20}/></button>
                 <div className="w-[1px] h-4 bg-romantic-pink/30" />
-                <button onClick={() => document.getElementById('journey')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">رحلتنا</button>
-                <button onClick={() => document.getElementById('gallery')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">الذكريات</button>
-                <button onClick={() => document.getElementById('quest')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">اللعبة</button>
+                <button onClick={() => document.getElementById('journey')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">طريقكِ</button>
+                <button onClick={() => document.getElementById('gallery')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">إلهام</button>
+                <button onClick={() => document.getElementById('quest')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">تحدي</button>
                 <button onClick={() => document.getElementById('letter')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">رسالتي</button>
               </div>
             </nav>
@@ -425,24 +502,13 @@ export default function App() {
             {/* HERO SECTION */}
             <MouseSparkles />
             <section className="min-h-screen flex flex-col items-center justify-center relative p-6">
-              <div className="absolute top-8 right-8 z-30">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={toggleMusic}
-                  className="p-4 bg-white/50 backdrop-blur-md rounded-full shadow-lg text-romantic-red hover:bg-white transition-all"
-                >
-                  {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-                </motion.button>
-              </div>
-
               <div className="max-w-4xl w-full text-center z-10 space-y-8">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <span className="text-romantic-red font-bold tracking-[0.3em] uppercase text-sm mb-4 block">كل شـيء بالنسـبة لي</span>
+                  <span className="text-romantic-red font-bold tracking-[0.3em] uppercase text-sm mb-4 block">أفضل شخصية مجتهدة</span>
                   <h1 className="text-7xl md:text-9xl font-serif font-bold text-gray-900 mb-6 px-4">
                     ندى
                   </h1>
@@ -454,7 +520,7 @@ export default function App() {
                   transition={{ delay: 0.4 }}
                   className="glass p-10 rounded-[3rem] shadow-xl relative mt-12 bg-white/60"
                 >
-                  <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mb-8">كل ثانية منذ أن التقينا</p>
+                  <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mb-8">إجمالي السعي نحو التميز</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {[
                       { label: 'أيام', value: totalDays },
@@ -478,7 +544,7 @@ export default function App() {
                   className="pt-16 flex flex-col items-center text-gray-400 gap-2 cursor-pointer"
                   onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                 >
-                  <span className="text-xs uppercase tracking-widest font-bold">تعمقي في قلبي أكثر</span>
+                  <span className="text-xs uppercase tracking-widest font-bold">تعمقي في رسائل التشجيع</span>
                   <ChevronDown size={20} />
                 </motion.div>
               </div>
@@ -486,7 +552,7 @@ export default function App() {
 
             {/* TIMELINE SECTION */}
             <section id="journey" className="py-32 px-6 max-w-5xl mx-auto relative">
-              <SectionHeading subtitle="لحظاتنا الصغيرة والكبيرة">رحلتنا مـعاً</SectionHeading>
+              <SectionHeading subtitle="رحلة الكفاح والإصرار">طريقكِ نحو القمة</SectionHeading>
               
               <div className="relative">
                 <div className="absolute right-6 md:right-1/2 transform translate-x-1/2 h-full w-[2px] timeline-line opacity-30" />
@@ -498,24 +564,24 @@ export default function App() {
 
             {/* GALLERY SECTION */}
             <section id="gallery" className="py-32 px-6 bg-white/30 backdrop-blur-sm">
-              <SectionHeading subtitle="توثيق ابتسامتِك">مخزن الذكريات</SectionHeading>
+              <SectionHeading subtitle="الحياة بقى لونها بمبي💗">معرض الورود الملهم</SectionHeading>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {[
                   {
-                    src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069",
-                    caption: "عندما كانت السماء بجمالكِ تماماً.",
-                    loc: "غروب الشمس في الحديقة"
+                    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2069",
+                    caption: "الجمال يكمن في التفاصيل الصغيرة.",
+                    loc: "عالم الورود"
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1516589174184-c6848b116743?q=80&w=1974",
-                    caption: "الطريقة التي تضحكين بها...",
-                    loc: "مواعيد المقاهي السرية"
+                    src: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=1974",
+                    caption: "كوني كالأزهار، تنمو برقة في كل الظروف.",
+                    loc: "حديقة التفاؤل"
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070",
-                    caption: "كل تفاصيلكِ تستحق التذكر.",
-                    loc: "رحلات الشتاء"
+                    src: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=2070",
+                    caption: "وردة واحدة قد تكون بداية ربيع جديد.",
+                    loc: "أمل متجدد"
                   }
                 ].map((photo, i) => (
                   <motion.div
@@ -531,11 +597,11 @@ export default function App() {
                       <div className="aspect-[4/5] overflow-hidden rounded-2xl relative">
                         <img 
                           src={photo.src} 
-                          alt="Special Memory" 
+                          alt="Pink Rose" 
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-romantic-red/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-romantic-pink/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                     </div>
                     <div className="bg-white p-6 rounded-t-none rounded-b-[2rem] shadow-lg border-t border-romantic-bg">
@@ -555,8 +621,8 @@ export default function App() {
               <div className="max-w-2xl mx-auto glass rounded-[2.5rem] p-12 text-center relative overflow-hidden group">
                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-romantic-pink/10 rounded-full blur-2xl group-hover:bg-romantic-pink/20 transition-colors" />
                 <Gift className="mx-auto text-romantic-red mb-6" size={40} />
-                <h3 className="text-2xl font-serif font-bold text-gray-800 mb-2">سبب يجعلني أحبكِ</h3>
-                <p className="text-romantic-red font-cursive text-xl mb-8">اضغطي للكشف عن مفاجأة</p>
+                <h3 className="text-2xl font-serif font-bold text-gray-800 mb-2">كلمة تشجيعية لكِ</h3>
+                <p className="text-romantic-red font-cursive text-xl mb-8">اضغطي لمزيد من التفاؤل</p>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -585,7 +651,7 @@ export default function App() {
 
             {/* GAME SECTION */}
             <section id="quest" className="py-32 px-6 max-w-4xl mx-auto">
-              <SectionHeading subtitle="اصطادي مشاعري">مهمة الحب</SectionHeading>
+              <SectionHeading subtitle="الحياة بقى لونها بمبي💗">تحدي الإنجاز والمثابرة</SectionHeading>
               <LoveQuest />
             </section>
 
@@ -595,15 +661,21 @@ export default function App() {
                 <Quote className="absolute top-8 right-8 text-romantic-pink/20" size={80} />
                 
                 <div className="relative z-10 text-center space-y-8">
-                  <h2 className="text-4xl font-serif font-bold text-gray-900 italic">عزيزتي ندى،</h2>
-                  <p className="text-xl text-gray-700 font-serif leading-relaxed italic max-w-2xl mx-auto">
-                    "لو كان بإمكاني منحكِ شيئاً واحداً في هذه الحياة، لمنحتكِ القدرة على رؤية نفسكِ من خلال عيني، عندها فقط ستدركين كم أنتِ مميزة حقاً بالنسبة لي. أنتِ موطني، وسلامي، وأعظم مغامراتي."
-                  </p>
+                  <h2 className="text-4xl font-serif font-bold text-gray-900 italic">إلى ندى،</h2>
+                  <div className="text-lg text-gray-700 font-serif leading-relaxed italic max-w-3xl mx-auto text-justify space-y-4">
+                    <p>أنا حابب أقولك حاجة من غير مقدمات كتير، واضح جدًا إنك بتشيلي مسؤولية كبيرة سواء في الشغل أو الدراسة، وده مش سهل خالص على أي حد، وخصوصا في الفترة اللي كلها ضغط دي.</p>
+                    <p>بس في نفس الوقت ده بيقول حاجة مهمة جدًا عنك، إنك شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا.</p>
+                    <p>وعارف إن الجمع بين الشغل والمذاكرة خصوصًا وقت الامتحانات بيبقى مرهق جدًا وممكن يخلي الواحد يحس إنه مش لاحق على حاجة أو إن كل حاجة متراكمة فوق دماغه، بس صدقيني الإحساس ده طبيعي جدًا وكل الناس اللي بتجتهد بتمر بيه في مرحلة معينة.</p>
+                    <p>والفرق الحقيقي بيكون في إنك مكملة رغم كل ده وموقفتيش، وده اللي بيخليكي في الآخر توصلي للي انتي عايزاه، فحاولي تاخدي كل حاجة واحدة واحدة من غير ما تضغطي على نفسك زيادة عن اللزوم، ومش لازم كل حاجة تبقى بيرفكت طول الوقت.</p>
+                    <p>المهم إنك بتتحركي لقدام حتى لو بخطوات صغيرة، وافتكري دايمًا إن أي تعب أو ضغط دلوقتي هو فترة وهتعدي، والنتيجة اللي بعدها هي اللي هتخليكي تنسي كل التعب ده وكملي حتى لو شغلك متعب او مرهق في وقت من الأوقات كل ما تحسي صبرك خلص من الشغل ده افتكري إنك لسه لك خطوات بسيطة وتوصلي لحلمك.</p>
+                    <p>وكمان متنسيش تدي لنفسك حقها في الراحة حتى لو وقت بسيط، علشان تقدري ترجعي تكملي بنفس الطاقة، لأن الاستمرار محتاج توازن مش ضغط بس، وأنا متأكد إنك قدها وهتعدي الفترة دي بشكل كويس جدًا وهتفرحي بنفسك وبكل اللي عملتيه.</p>
+                    <p>وإن شاء الله الأيام الجاية تكون أخف عليكي وفيها راحة ونتايج حلوة تليق بكل المجهود اللي بتعمليه ودايما متنسيش، الحياة بقى لونها بمبي 😂💗</p>
+                  </div>
                   
                   <div className="pt-12 border-t border-romantic-pink/20">
                     <h3 className="text-romantic-red font-bold uppercase tracking-widest text-xs mb-8 flex items-center justify-center gap-2">
                       <MessageSquareHeart size={16} />
-                      اتركي نبضة قلب
+                      اتركي بصمتكِ الإيجابية
                     </h3>
                     
                     <form onSubmit={sendMessage} className="flex gap-4 max-w-md mx-auto mb-12">
@@ -611,7 +683,7 @@ export default function App() {
                         type="text"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
-                        placeholder="اكتبي ملاحظة صغيرة..."
+                        placeholder="اكتبي ملاحظة تشجيعية..."
                         className="flex-1 bg-white/50 border border-romantic-pink/30 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-romantic-pink transition-all font-sans"
                       />
                       <motion.button
@@ -640,7 +712,7 @@ export default function App() {
                         ))}
                       </AnimatePresence>
                       {messages.length === 0 && (
-                        <p className="text-gray-400 italic text-sm font-serif">لا توجد رسائل هنا بعد. قولي شيئاً جميلاً...</p>
+                        <p className="text-gray-400 italic text-sm font-serif">لا توجد رسائل هنا بعد. الحياة بقى لونها بمبي💗</p>
                       )}
                     </div>
                   </div>
@@ -651,11 +723,11 @@ export default function App() {
             {/* FOOTER */}
             <footer className="py-20 text-center text-gray-400 px-6">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Heart size={16} className="text-romantic-red fill-romantic-red" />
-                <span className="font-serif text-2xl text-romantic-red">دائماً لكِ</span>
-                <Heart size={16} className="text-romantic-red fill-romantic-red" />
+                <Star size={16} className="text-romantic-red fill-romantic-red" />
+                <span className="font-serif text-2xl text-romantic-red">مع كل التقدير</span>
+                <Star size={16} className="text-romantic-red fill-romantic-red" />
               </div>
-              <p className="text-xs uppercase tracking-[0.3em] font-bold">صُنع خصيصاً لندى • 2026</p>
+              <p className="text-xs uppercase tracking-[0.3em] font-bold">الحياة بقى لونها بمبي💗 • 2026</p>
             </footer>
           </motion.div>
         )}

@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
-import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target, Lock, Key, Clock } from 'lucide-react';
+import { Heart, Music, Pause, Play, Calendar, Star, Sparkles, Send, MessageSquareHeart, ChevronDown, Camera, MapPin, Quote, Gift, RefreshCw, Gamepad2, Trophy, Target, Lock, Key, Clock, Activity, Stethoscope, Microscope, Beaker } from 'lucide-react';
 import { format, differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import confetti from 'canvas-confetti';
 
@@ -118,7 +118,7 @@ const LoveQuest = () => {
           <Gamepad2 className="mx-auto text-romantic-red" size={48} />
           <h3 className="text-3xl font-serif font-bold text-gray-800">مهمة النجاح</h3>
           <p className="text-gray-500 max-w-md mx-auto">
-            التقطي 10 أهداف لتكشفي عن رسالتي التي تفخر بكِ. هل أنت مستعدة يا هداية؟
+            التقط 10 أهداف لتكتشف الرسالة. هل أنت مستعد يا دكتور؟
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -126,7 +126,7 @@ const LoveQuest = () => {
             onClick={() => setGameStarted(true)}
             className="bg-romantic-red text-white px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-romantic-red/40"
           >
-            ابدئي الآن
+            ابدأ الآن
           </motion.button>
         </div>
       ) : showPrize ? (
@@ -137,9 +137,9 @@ const LoveQuest = () => {
         >
           <div className="bg-white p-10 rounded-[3rem] shadow-2xl border-2 border-romantic-pink">
              <Trophy className="mx-auto text-yellow-500 mb-4" size={50} />
-             <h3 className="text-4xl font-serif font-bold text-romantic-red mb-4">فخور بكِ دائماً!</h3>
+             <h3 className="text-4xl font-serif font-bold text-romantic-red mb-4">فخور بك دائماً!</h3>
              <p className="text-xl font-serif italic text-gray-700 leading-relaxed">
-               "أنتِ شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا. كملي وحلمك قرب يتحقق."
+               "أنت طبيب ناجح وقوي، وتستحق كل تقدير على مجهودك وتعبك. استمر في طريقك، فالمستقبل يبتسم لك."
              </p>
              <button 
                 onClick={() => {setScore(0); setGameStarted(false); setShowPrize(false);}}
@@ -155,7 +155,7 @@ const LoveQuest = () => {
             <Star className="text-romantic-red fill-romantic-red" size={20} />
             <span className="font-bold text-xl text-romantic-red">{score} / 10</span>
           </div>
-          <p className="absolute top-6 right-6 text-gray-400 text-sm italic">اصطادي النجاح!</p>
+          <p className="absolute top-6 right-6 text-gray-400 text-sm italic">اصطد النجاح!</p>
           
           <AnimatePresence>
             {hearts.map(h => (
@@ -206,7 +206,7 @@ const DriftingPetals = () => {
           key={p.id}
           initial={{ opacity: 0, y: "-10vh", x: 0, rotate: 0 }}
           animate={{ 
-            opacity: [0, 0.4, 0.4, 0],
+            opacity: [0, 0.6, 0.6, 0],
             y: "110vh",
             x: [0, p.xOffset, p.xOffset * 1.5],
             rotate: [0, 180, 360]
@@ -221,7 +221,7 @@ const DriftingPetals = () => {
           style={{
             left: p.left,
             fontSize: `${p.size}px`,
-            color: 'rgba(255, 255, 255, 0.6)'
+            color: 'rgba(255, 255, 255, 0.8)'
           }}
         >
           🤍
@@ -298,14 +298,13 @@ export default function App() {
   const [currentCompliment, setCurrentCompliment] = useState(0);
   
   const compliments = [
-    "أنتِ أقوى مما تتخيلين يا هداية.",
-    "فخور بكل خطوة تخطينها في حياتكِ.",
-    "تذكري دائماً أنكِ قادرة على تحقيق المستحيل.",
-    "الشغل والمذاكرة ضغط كبير، لكنكِ قدها وقدود.",
-    "ابتسامتكِ هي سر سعادتنا جميعاً.",
-    "استمري في السعي، حلمكِ يستحق كل هذا التعب.",
-    "أنتِ لستِ وحدكِ، أنا دائماً هنا لأدعمكِ.",
-    "أنتِ النسخة الأفضل من نفسكِ كل يوم."
+    "أنت طبيب استثنائي وجراح ماهر في المستقبل.",
+    "فخور بكل ليلة قضيتها في الدراسة والعمل الجاد.",
+    "مهمتك إنسانية، وأنت أهل لهذه الأمانة.",
+    "الصبر والمثابرة هما مفتاح تميزك كطبيب.",
+    "إبداعك في الطب سيعالج آمال الكثيرين.",
+    "استمر في شغفك بالعلم، فهو زادك الحقيقي.",
+    "أنت فخر لعائلتنا وسند لكل من يحتاجك.",
   ];
 
   const nextCompliment = () => {
@@ -317,7 +316,7 @@ export default function App() {
     });
   };
   
-  const anniversaryDate = new Date('2010-12-13T00:00:00');
+  const anniversaryDate = new Date('2007-07-28T00:00:00');
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
@@ -332,14 +331,14 @@ export default function App() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // The code is 13-12-2010
-    if (accessCode.trim() === '13-12-2010' || accessCode.trim() === '13/12/2010') {
+    // The code is 28-7-2007
+    if (accessCode.trim() === '28-7-2007' || accessCode.trim() === '28/7/2007') {
       setIsOpened(true);
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#ffffff', '#f0f0f0', '#000000']
+        colors: ['#ffffff', '#f0f0f0', '#2c3e50']
       });
     } else {
       setLoginError(true);
@@ -373,23 +372,12 @@ export default function App() {
   };
 
   const timelineData = [
-    { year: 2010, title: "بداية الرحلة", description: "بداية رحلة الحياة المليئة بالأمل والفرص الواعدة.", icon: Star },
-    { year: 2011, title: "خطوات واثقة", description: "خطوة جديدة نحو النجاح وبداية استكشاف مواهبكِ الكامنة.", icon: Camera },
-    { year: 2012, title: "قوة ومثابرة", description: "هنا تثبتين أنكِ قوية ومثابرة في كل تفاصيل حياتكِ اليومية.", icon: Heart },
-    { year: 2013, title: "الإصرار ينمو", description: "الإصرار ينمو معكِ، والحلم يصبح أقرب يوماً بعد يوم بفضل اجتهادكِ.", icon: Target },
-    { year: 2014, title: "طموح بلا حدود", description: "طموحكِ لا حدود له، والقادم دائماً أجمل بإذن الله لمن يسعى مثلكِ.", icon: Sparkles },
-    { year: 2015, title: "تحدي الصعاب", description: "تخطين الصعاب برقة الورد وقوة الجبال، فخور جداً بمجهودكِ المميز.", icon: Trophy },
-    { year: 2016, title: "بصمة نجاح", description: "كل مجهود تبذلينه هو بصمة نجاح حقيقية في طريقكِ المشرق نحو التميز.", icon: Gift },
-    { year: 2017, title: "ثقة بالنفس", description: "ثقتكِ بنفسكِ هي وقودكِ الحقيقي للوصول إلى أعلى القمم التي تطمحين إليها.", icon: Calendar },
-    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه.", icon: MapPin },
-    { year: 2019, title: "السعي المستمر", description: "استمري في السعي والمثابرة، فالنجاح يليق بكِ تماماً وبشخصيتكِ القوية.", icon: Quote },
-    { year: 2020, title: "سنة التحديات", description: "سنة التحديات الكبرى التي أثبتتِ فيها للعالم أنكِ أقوى من أي ظرف صعب.", icon: RefreshCw },
-    { year: 2021, title: "إشراق دائم", description: "إشراقكِ الدائم وطاقتكِ يمنحان الجميع إلهاماً لا ينتهي للسعي والعمل.", icon: Star },
-    { year: 2022, title: "ذكاء وطموح", description: "الذكاء والطموح يجتمعان فيكِ ليرسما ملامح مستقبلكِ الباهر والناجح.", icon: Lock },
-    { year: 2023, title: "تغلب على العقبات", description: "كل عقبة تغلبتِ عليها هي في الحقيقة قصة نجاح ملهمة تضاف إلى رصيدكِ.", icon: Gamepad2 },
-    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل.", icon: Heart },
-    { year: 2025, title: "قرب الحلم", description: "تقتربين من حلمكِ الكبير بخطوات واثقة، هادئة، ومدروسة كعادتكِ دائماً.", icon: Target },
-    { year: 2026, title: "فخر بالمستقبل", description: "فخور بكل ما وصلتِ إليه اليوم وبكل الإنجازات التي ستحققينها غداً.", icon: Trophy },
+    { year: 2007, title: "يوم الميلاد", description: "بداية رحلة حياة ستحمل الكثير من الأمل والشفاء للناس.", icon: Heart },
+    { year: 2013, title: "بداية الشغف", description: "استكشاف أسرار العلم والرغبة في المعرفة.", icon: Microscope },
+    { year: 2019, title: "تحديات العلم", description: "سنوات من الدراسة المكثفة والاجتهاد الأكاديمي.", icon: Beaker },
+    { year: 2024, title: "خطوات المستشفى", description: "بداية تطبيق العلم عملياً في بيئة احترافية.", icon: Activity },
+    { year: 2025, title: "مسار التخصص", description: "التركيز على مسار مهني يخدم الإنسانية بكل إخلاص.", icon: Stethoscope },
+    { year: 2026, title: "مستقبل مشرق", description: "فخورون بكل ما ستحققه كطبيب بارع في المستقبل.", icon: Trophy },
   ].map(item => ({
     date: `عام ${item.year}`,
     title: item.title,
@@ -449,11 +437,11 @@ export default function App() {
                   <Lock className="text-romantic-red" size={40} strokeWidth={1.5} />
                 </motion.div>
                 <div className="space-y-2">
-                  <h1 className="text-5xl font-serif font-bold text-gray-900 tracking-tight">بوابة هداية</h1>
-                  <p className="text-romantic-red font-cursive text-2xl opacity-70 italic">رحلة الصبر والنجاح</p>
+                  <h1 className="text-5xl font-serif font-bold text-gray-900 tracking-tight">بوابة الطبيب</h1>
+                  <p className="text-romantic-red font-cursive text-2xl opacity-70 italic">رحلة العلم والعطاء</p>
                 </div>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed px-10">
-                  أدخلي الرمز المميز لفتح مساحتك الخاصة المليئة بالإلهام والتشجيع.
+                  أدخل رمز الوصول الخاص بك لاستكشاف مسيرة نجاحك وإنجازاتك.
                 </p>
               </div>
 
@@ -464,7 +452,7 @@ export default function App() {
                       type="text"
                       value={accessCode}
                       onChange={(e) => setAccessCode(e.target.value)}
-                      placeholder="13-12-2010"
+                      placeholder="28-7-2007"
                       className={`w-full bg-romantic-bg/40 border ${loginError ? 'border-red-400 animate-shake' : 'border-romantic-pink/30'} rounded-3xl px-8 py-5 text-center text-2xl font-serif tracking-[0.3em] focus:outline-none focus:ring-4 focus:ring-romantic-pink/20 transition-all shadow-inner placeholder:text-gray-300 placeholder:tracking-normal placeholder:font-sans`}
                     />
                     {loginError && (
@@ -520,7 +508,7 @@ export default function App() {
               <div className="max-w-max mx-auto glass px-6 py-3 rounded-full flex items-center gap-6 pointer-events-auto">
                 <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="text-romantic-red hover:scale-110 transition-transform"><Star size={20}/></button>
                 <div className="w-[1px] h-4 bg-romantic-pink/30" />
-                <button onClick={() => document.getElementById('journey')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">طريقكِ</button>
+                <button onClick={() => document.getElementById('journey')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">طريقك</button>
                 <button onClick={() => document.getElementById('gallery')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">إلهام</button>
                 <button onClick={() => document.getElementById('quest')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">تحدي</button>
                 <button onClick={() => document.getElementById('letter')?.scrollIntoView({behavior:'smooth'})} className="text-gray-600 hover:text-romantic-red font-bold text-[10px] uppercase tracking-widest">رسالتي</button>
@@ -550,10 +538,10 @@ export default function App() {
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                   className="space-y-4"
                 >
-                  <p className="text-romantic-red font-bold tracking-[0.6em] uppercase text-xs mb-8 block opacity-60">أفضل شخصية مجتهدة</p>
+                  <p className="text-romantic-red font-bold tracking-[0.6em] uppercase text-xs mb-8 block opacity-60">أفضل طبيب مجتهد</p>
                   <div className="relative inline-block">
                     <h1 className="text-8xl md:text-[14rem] font-serif font-bold text-gray-900 tracking-tighter leading-[0.8] italic px-8">
-                       هداية
+                       د/ محمد
                     </h1>
                     <motion.div 
                       initial={{ scale: 0 }}
@@ -561,7 +549,7 @@ export default function App() {
                       transition={{ delay: 1, type: "spring" }}
                       className="absolute -top-12 -right-4 md:-top-20 md:right-0"
                     >
-                      <Sparkles className="text-romantic-pink w-16 h-16 animate-pulse" />
+                      <Activity className="text-romantic-pink w-16 h-16 animate-pulse" />
                     </motion.div>
                   </div>
                 </motion.div>
@@ -572,7 +560,7 @@ export default function App() {
                   transition={{ delay: 0.8 }}
                   className="text-romantic-red font-cursive text-4xl md:text-6xl italic opacity-80"
                 >
-                  رحلة تميز لا تنتهي
+                  رسالة تقدير لرحلة الطب
                 </motion.p>
 
                 <motion.div
@@ -583,13 +571,14 @@ export default function App() {
                 >
                   <div className="glass p-10 md:p-16 rounded-[4rem] relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-br from-romantic-pink/5 to-transparent pointer-events-none" />
+                    <p className="text-[12px] text-romantic-red font-bold mb-2">هذا العداد يحسب الوقت منذ اللحظة التي ولدت فيها</p>
                     <p className="text-[10px] uppercase tracking-[0.5em] text-gray-400 font-bold mb-14">سجل السعي والإنجاز</p>
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-4 relative z-10">
                       {[
-                        { label: 'أيام السعي', value: totalDays, icon: Calendar },
-                        { label: 'ساعات الكفاح', value: hours, icon: RefreshCw },
-                        { label: 'دقائق الصبر', value: minutes, icon: Star },
-                        { label: 'ثواني الإنجاز', value: seconds, icon: Sparkles },
+                        { label: 'أيام العمر', value: totalDays, icon: Calendar },
+                        { label: 'ساعات الاجتهاد', value: hours, icon: RefreshCw },
+                        { label: 'دقائق التركيز', value: minutes, icon: Activity },
+                        { label: 'ثواني الإبداع', value: seconds, icon: Sparkles },
                       ].map((item, idx) => (
                         <div key={item.label} className="relative group/stat px-4">
                           <item.icon size={16} className="mx-auto mb-4 text-romantic-pink/40" />
@@ -614,7 +603,7 @@ export default function App() {
                   className="pt-24 cursor-pointer group flex flex-col items-center"
                   onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  <p className="text-[9px] uppercase tracking-[0.6em] text-gray-300 font-bold group-hover:text-romantic-red transition-colors mb-6">اكتشفي مساركِ</p>
+                  <p className="text-[9px] uppercase tracking-[0.6em] text-gray-300 font-bold group-hover:text-romantic-red transition-colors mb-6">اكتشف مسارك</p>
                   <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-romantic-red group-hover:text-romantic-red transition-all duration-500 shadow-sm">
                     <ChevronDown size={24} />
                   </div>
@@ -624,7 +613,7 @@ export default function App() {
 
             {/* TIMELINE SECTION */}
             <section id="journey" className="py-32 px-6 max-w-5xl mx-auto relative">
-              <SectionHeading subtitle="رحلة الكفاح والإصرار">طريقكِ نحو القمة</SectionHeading>
+              <SectionHeading subtitle="رحلة الكفاح والإصرار">طريقك نحو القمة</SectionHeading>
               
               <div className="relative">
                 <div className="absolute right-6 md:right-1/2 transform translate-x-1/2 h-full w-[2px] timeline-line opacity-30" />
@@ -637,26 +626,26 @@ export default function App() {
             {/* GALLERY SECTION */}
             <section id="gallery" className="py-40 px-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-96 h-96 bg-romantic-pink/5 blur-[100px] pointer-events-none" />
-              <SectionHeading subtitle="جمال الإصرار">لحظات من الإلهام</SectionHeading>
+              <SectionHeading subtitle="إتقان ومهارة">لمحات من مسيرتك المهنية</SectionHeading>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
                 {[
                   {
-                    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2069",
-                    caption: "الجمال يكمن في التفاصيل الصغيرة.",
-                    loc: "عالم الورود",
+                    src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070",
+                    caption: "دقة التشخيص وأمانة العمل هي شعارك الدائم.",
+                    loc: "بيئة احترافية",
                     size: "md:col-span-2 lg:col-span-1 h-[400px]"
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=1974",
-                    caption: "كوني كالأزهار، تنمو برقة في كل الظروف.",
-                    loc: "حديقة التفاؤل",
+                    src: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=2047",
+                    caption: "التطور المستمر هو طريقك نحو القمة في عالم الطب.",
+                    loc: "غرفة الأبحاث",
                     size: "h-[500px]"
                   },
                   {
-                    src: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=2070",
-                    caption: "وردة واحدة قد تكون بداية ربيع جديد.",
-                    loc: "أمل متجدد",
+                    src: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=2070",
+                    caption: "كل مريض تعالجه هو قصة نجاح تضاف لتاريخك.",
+                    loc: "طريق الشفاء",
                     size: "h-[450px]"
                   }
                 ].map((photo, i) => (
@@ -703,8 +692,8 @@ export default function App() {
                   <Gift size={32} strokeWidth={1} />
                 </motion.div>
                 
-                <h3 className="text-sm font-bold text-romantic-red tracking-[0.5em] uppercase mb-4 opacity-60">هدية معنوية</h3>
-                <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-12 leading-tight">كلمات تشجيعية لنبض قلبكِ</h2>
+                <h3 className="text-sm font-bold text-romantic-red tracking-[0.5em] uppercase mb-4 opacity-60">فخر واعتزاز</h3>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-12 leading-tight">رسائل طبية لروحك المعطاءة</h2>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -734,7 +723,7 @@ export default function App() {
 
             {/* GAME SECTION */}
             <section id="quest" className="py-32 px-6 max-w-4xl mx-auto">
-              <SectionHeading subtitle="طريقكِ نحو التميز">تحدي الإنجاز والمثابرة</SectionHeading>
+              <SectionHeading subtitle="طريقك نحو التميز">تحدي الإنجاز والمثابرة</SectionHeading>
               <LoveQuest />
             </section>
 
@@ -744,10 +733,10 @@ export default function App() {
                 whileInView={{ y: 0, opacity: 1 }}
                 initial={{ y: 50, opacity: 0 }}
                 viewport={{ once: true }}
-                className="glass rounded-[4rem] p-12 md:p-24 relative overflow-hidden shadow-[0_48px_80px_-16px_rgba(255,77,109,0.1)]"
+                className="glass rounded-[4rem] p-12 md:p-24 relative overflow-hidden shadow-[0_48px_80px_-16px_rgba(0,0,0,0.05)]"
               >
                 <Quote className="absolute top-12 right-12 text-romantic-pink/10" size={120} />
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-romantic-pink via-romantic-red to-romantic-pink opacity-20" />
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 opacity-20" />
                 
                 <div className="relative z-10 space-y-16">
                   <div className="text-center space-y-4">
@@ -756,27 +745,24 @@ export default function App() {
                       whileInView={{ scale: 1 }}
                       className="w-16 h-16 bg-romantic-red/5 rounded-2xl flex items-center justify-center mx-auto text-romantic-red mb-6"
                     >
-                      <Heart size={32} />
+                      <Stethoscope size={32} />
                     </motion.div>
-                    <h2 className="text-5xl font-serif font-bold text-gray-900 italic tracking-tight">إلى هداية،</h2>
+                    <h2 className="text-5xl font-serif font-bold text-gray-900 italic tracking-tight">إلى أخي الطبيب البارع،</h2>
                     <div className="h-[1px] w-24 bg-romantic-red/20 mx-auto" />
                   </div>
 
                   <div className="text-xl md:text-2xl text-gray-700 font-serif leading-[1.8] italic max-w-4xl mx-auto text-justify space-y-8 antialiased">
-                    <p className="bg-gradient-to-r from-romantic-red/5 to-transparent p-4 rounded-xl border-r-2 border-romantic-red/20">بصي أنا ابغاك تقراي كلامي ده بهدوء كده وتعطي لنفسك لحظة بس تفصلي فيها عن كل اللي حواليكي لأن بجد أنا حاسس قد إيه الفترة دي تقيلة عليكي وكل حاجة جاية ورا بعض بشكل يجعل أي شخص ينهار مش بس يزعل.</p>
-                    <p>موبايلك اتكسر ودي حاجة كانت مهمة ليكي وبتفصلك شوية عن الضغط وبعدها نتيجة العربي جت مش زي ما كنتي متوقعة ومعاها كلام يوجع من جدتك وضغط من غير سبب واضح فطبيعي جدا تحسي إن الدنيا كلها قافلة في وشك ومفيش شيء ماشي صح ومفيش حتى فرصة تاخدي نفسك أو ترتاحي شوية.</p>
-                    <p className="text-gray-900 font-bold not-italic">بس وسط كل ده أنا عايزك تهدي على نفسك شوية ومتشيليش نفسك الغلط في كل حاجة لأن اللي بيحصل ده مش دليل إنك فاشلة ولا إنك وحشة ولا إنك مش قد المسؤولية خالص انتي بس تعبانة ومضغوطة فوق طاقتك وده طبيعي يخلي أي حد مستواه يقل شوية أو يحس إنه مش قادر يكمل بنفس القوة.</p>
-                    <p>نتيجة امتحان واحد مش هيحدد انتي مين ولا مستقبلك هيبقى عامل إزاي ده مجرد موقف وعدى وهنعوضه بإذن الله خطوة خطوة ومفيش حد ناجح معداش بلحظات زي دي قبل كده بالعكس دي جزء من الطريق نفسه.</p>
-                    <p className="bg-romantic-pink/5 p-6 rounded-[2rem] border border-romantic-pink/10">والموبايل مهما كان مهم فهو حاجة بتتعوض وبتتصلح إن شاء الله حتى لو الموضوع مضايقك دلوقتي بس هو مش نهاية الدنيا ولا حاجة تكسرك بالشكل ده، أما بقى بالنسبة للكلام اللي بيوجع من اللي حواليكي أنا عارف قد إيه ده صعب ومؤلم خصوصا لما يكون من حد المفروض يحس بيكي ويحتويكي بس صدقيني ده مش مقياس لقيمتك ولا لشخصك ولا ليكي كإنسانة.</p>
-                    <p>انتي بنت كويسة جدا واجتهادك واضح من كل حاجة حكيتيها قبل كده وانك لسه بتحاولي ومكملة رغم كل ده ده لوحده حاجة كبيرة جدا تدل على قوة جواكي يمكن انتي مش شايفاها دلوقتي بس موجودة، ف بدل ما تقسي على نفسك وتحسي إنك مقصرة في كل حاجة حاولي تبصي لنفسك ب حنية شوية وتديها حقها من الراحة.</p>
-                    <p>انتي مش آلة علشان تستحملي كل ده من غير ما تتأثري خدي الأمور واحدة واحدة من غير ما تفكري في كل حاجة مرة واحدة يعني النهارده بس عدي اليوم على خير وبكرة نشوف خطوة صغيرة نعملها وهكذا لحد ما الدنيا تهدى شوية.</p>
-                    <p className="text-center text-romantic-red text-3xl font-cursive mt-12 block transform hover:scale-110 transition-transform duration-500 cursor-default">ومتنسيش كمان إن كل ده مهما طول هو فترة وهتعدي مش هتفضل كده على طول، وأنا موجود أسمعك دايماً وخلي بالك من نفسك علشان انتي تستاهلي الراحة والهدوء والحاجات الحلوة 🤍</p>
+                    <p className="bg-gradient-to-r from-slate-50 to-transparent p-6 rounded-xl border-r-2 border-slate-200">أخي الغالي، أكتب لك هذه الكلمات لأعبر عن مدى فخري واعتزازي بك وبالمكانة التي وصلت إليها. لقد تابعت رحلتك خطوة بخطوة، ورأيت مقدار التعب والسهر والجهد الذي بذلته لتصبح ما أنت عليه اليوم.</p>
+                    <p>مهنة الطب ليست مجرد دراسة، بل هي رسالة إنسانية نبيلة، وأنت أثبتّ أنك أهل لهذه المسؤولية العظيمة بصبرك ودقتك وحرصك المستمر على مساعدة الآخرين والتخفيف من آلامهم.</p>
+                    <p className="text-gray-900 font-bold not-italic">شكراً لك على كل ما فعلته من أجلي، شكراً لكونك السند والقدوة والمصدر الدائم للإلهام والتشجيع في حياتي. وجودك بجانبي يعطيني القوة دائماً.</p>
+                    <p className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 text-center italic">أتمنى لك مستقبلاً باهراً، مليئاً بالنجاحات الطبية التي ستغير حياة الناس للأفضل، وأن تظل دوماً فخراً لنا جميعاً وللوطن.</p>
+                    <p className="text-center text-romantic-red text-3xl font-cursive mt-12 block transform hover:scale-110 transition-transform duration-500 cursor-default">مع كل الحب والتقدير لأفضل طبيب في العالم 🤍</p>
                   </div>
                   
                   <div className="pt-20 border-t border-romantic-pink/10 text-center">
                     <div className="inline-flex items-center gap-2 px-6 py-2 bg-romantic-red/5 rounded-full text-romantic-red font-bold uppercase tracking-[0.4em] text-[10px] mb-12">
                       <MessageSquareHeart size={14} />
-                      رسائل من القلب
+                      كلمات في حقك
                     </div>
                     
                     <form onSubmit={sendMessage} className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto mb-16 px-4">
@@ -784,7 +770,7 @@ export default function App() {
                         type="text"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
-                        placeholder="اكتبي كلمة تشجيعية هنا..."
+                        placeholder="اكتب كلمة تشجيعية هنا..."
                         className="flex-1 bg-white/40 border border-romantic-pink/20 rounded-[2rem] px-8 py-5 focus:outline-none focus:ring-4 focus:ring-romantic-pink/10 transition-all font-sans text-lg placeholder:text-gray-300"
                       />
                       <motion.button

@@ -118,7 +118,7 @@ const LoveQuest = () => {
           <Gamepad2 className="mx-auto text-romantic-red" size={48} />
           <h3 className="text-3xl font-serif font-bold text-gray-800">مهمة النجاح</h3>
           <p className="text-gray-500 max-w-md mx-auto">
-            التقطي 10 أهداف لتكشفي عن رسالتي التي تفخر بكِ. هل أنت مستعدة يا ندى؟ الحياة بقى لونها بمبي💗
+            التقطي 10 أهداف لتكشفي عن رسالتي التي تفخر بكِ. هل أنت مستعدة يا هداية؟
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -139,7 +139,7 @@ const LoveQuest = () => {
              <Trophy className="mx-auto text-yellow-500 mb-4" size={50} />
              <h3 className="text-4xl font-serif font-bold text-romantic-red mb-4">فخور بكِ دائماً!</h3>
              <p className="text-xl font-serif italic text-gray-700 leading-relaxed">
-               "أنتِ شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا. كملي وحلمك قرب يتحقق.. الحياة بقى لونها بمبي💗"
+               "أنتِ شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا. كملي وحلمك قرب يتحقق."
              </p>
              <button 
                 onClick={() => {setScore(0); setGameStarted(false); setShowPrize(false);}}
@@ -221,10 +221,10 @@ const DriftingPetals = () => {
           style={{
             left: p.left,
             fontSize: `${p.size}px`,
-            color: 'rgba(255, 175, 189, 0.4)'
+            color: 'rgba(255, 255, 255, 0.6)'
           }}
         >
-          🌸
+          🤍
         </motion.div>
       ))}
     </div>
@@ -298,11 +298,10 @@ export default function App() {
   const [currentCompliment, setCurrentCompliment] = useState(0);
   
   const compliments = [
-    "أنتِ أقوى مما تتخيلين يا ندى.",
+    "أنتِ أقوى مما تتخيلين يا هداية.",
     "فخور بكل خطوة تخطينها في حياتكِ.",
     "تذكري دائماً أنكِ قادرة على تحقيق المستحيل.",
     "الشغل والمذاكرة ضغط كبير، لكنكِ قدها وقدود.",
-    "الحياة بقى لونها بمبي💗",
     "ابتسامتكِ هي سر سعادتنا جميعاً.",
     "استمري في السعي، حلمكِ يستحق كل هذا التعب.",
     "أنتِ لستِ وحدكِ، أنا دائماً هنا لأدعمكِ.",
@@ -314,11 +313,11 @@ export default function App() {
     confetti({
       particleCount: 15,
       scalar: 0.7,
-      colors: ['#ffafbd']
+      colors: ['#ffffff', '#f0f0f0']
     });
   };
   
-  const anniversaryDate = new Date('2010-05-05T00:00:00');
+  const anniversaryDate = new Date('2010-12-13T00:00:00');
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
@@ -333,14 +332,14 @@ export default function App() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // The code is 5-5-2010
-    if (accessCode.trim() === '5-5-2010' || accessCode.trim() === '05-05-2010' || accessCode.trim() === '5/5/2010') {
+    // The code is 13-12-2010
+    if (accessCode.trim() === '13-12-2010' || accessCode.trim() === '13/12/2010') {
       setIsOpened(true);
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#ff748c', '#ffafbd', '#fff5f6']
+        colors: ['#ffffff', '#f0f0f0', '#000000']
       });
     } else {
       setLoginError(true);
@@ -369,12 +368,12 @@ export default function App() {
       particleCount: 20,
       spread: 40,
       origin: { y: 0.9 },
-      colors: ['#ff748c']
+      colors: ['#ffffff', '#dedede']
     });
   };
 
   const timelineData = [
-    { year: 2010, title: "بداية الرحلة", description: "بداية رحلة الحياة المليئة بالأمل والفرص الواعدة. الحياة بقى لونها بمبي💗", icon: Star },
+    { year: 2010, title: "بداية الرحلة", description: "بداية رحلة الحياة المليئة بالأمل والفرص الواعدة.", icon: Star },
     { year: 2011, title: "خطوات واثقة", description: "خطوة جديدة نحو النجاح وبداية استكشاف مواهبكِ الكامنة.", icon: Camera },
     { year: 2012, title: "قوة ومثابرة", description: "هنا تثبتين أنكِ قوية ومثابرة في كل تفاصيل حياتكِ اليومية.", icon: Heart },
     { year: 2013, title: "الإصرار ينمو", description: "الإصرار ينمو معكِ، والحلم يصبح أقرب يوماً بعد يوم بفضل اجتهادكِ.", icon: Target },
@@ -382,13 +381,13 @@ export default function App() {
     { year: 2015, title: "تحدي الصعاب", description: "تخطين الصعاب برقة الورد وقوة الجبال، فخور جداً بمجهودكِ المميز.", icon: Trophy },
     { year: 2016, title: "بصمة نجاح", description: "كل مجهود تبذلينه هو بصمة نجاح حقيقية في طريقكِ المشرق نحو التميز.", icon: Gift },
     { year: 2017, title: "ثقة بالنفس", description: "ثقتكِ بنفسكِ هي وقودكِ الحقيقي للوصول إلى أعلى القمم التي تطمحين إليها.", icon: Calendar },
-    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه. الحياة بقى لونها بمبي💗", icon: MapPin },
+    { year: 2018, title: "أثر جميل", description: "تميزكِ يترك أثراً جميلاً وإيجابياً في كل مكان تتواجدين فيه.", icon: MapPin },
     { year: 2019, title: "السعي المستمر", description: "استمري في السعي والمثابرة، فالنجاح يليق بكِ تماماً وبشخصيتكِ القوية.", icon: Quote },
     { year: 2020, title: "سنة التحديات", description: "سنة التحديات الكبرى التي أثبتتِ فيها للعالم أنكِ أقوى من أي ظرف صعب.", icon: RefreshCw },
     { year: 2021, title: "إشراق دائم", description: "إشراقكِ الدائم وطاقتكِ يمنحان الجميع إلهاماً لا ينتهي للسعي والعمل.", icon: Star },
     { year: 2022, title: "ذكاء وطموح", description: "الذكاء والطموح يجتمعان فيكِ ليرسما ملامح مستقبلكِ الباهر والناجح.", icon: Lock },
     { year: 2023, title: "تغلب على العقبات", description: "كل عقبة تغلبتِ عليها هي في الحقيقة قصة نجاح ملهمة تضاف إلى رصيدكِ.", icon: Gamepad2 },
-    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل، وفعلاً الحياة بقى لونها بمبي💗", icon: Heart },
+    { year: 2024, title: "تفاؤل مستمر", description: "نظرتكِ للمستقبل دائماً ما تكون مليئة بالتفاؤل.", icon: Heart },
     { year: 2025, title: "قرب الحلم", description: "تقتربين من حلمكِ الكبير بخطوات واثقة، هادئة، ومدروسة كعادتكِ دائماً.", icon: Target },
     { year: 2026, title: "فخر بالمستقبل", description: "فخور بكل ما وصلتِ إليه اليوم وبكل الإنجازات التي ستحققينها غداً.", icon: Trophy },
   ].map(item => ({
@@ -450,7 +449,7 @@ export default function App() {
                   <Lock className="text-romantic-red" size={40} strokeWidth={1.5} />
                 </motion.div>
                 <div className="space-y-2">
-                  <h1 className="text-5xl font-serif font-bold text-gray-900 tracking-tight">بوابة ندى</h1>
+                  <h1 className="text-5xl font-serif font-bold text-gray-900 tracking-tight">بوابة هداية</h1>
                   <p className="text-romantic-red font-cursive text-2xl opacity-70 italic">رحلة الصبر والنجاح</p>
                 </div>
                 <p className="text-gray-400 font-sans text-sm leading-relaxed px-10">
@@ -465,7 +464,7 @@ export default function App() {
                       type="text"
                       value={accessCode}
                       onChange={(e) => setAccessCode(e.target.value)}
-                      placeholder="5-5-2010"
+                      placeholder="13-12-2010"
                       className={`w-full bg-romantic-bg/40 border ${loginError ? 'border-red-400 animate-shake' : 'border-romantic-pink/30'} rounded-3xl px-8 py-5 text-center text-2xl font-serif tracking-[0.3em] focus:outline-none focus:ring-4 focus:ring-romantic-pink/20 transition-all shadow-inner placeholder:text-gray-300 placeholder:tracking-normal placeholder:font-sans`}
                     />
                     {loginError && (
@@ -481,10 +480,10 @@ export default function App() {
                 </div>
 
                 <motion.button
-                  whileHover={{ scale: 1.02, backgroundColor: '#ff1447' }}
+                  whileHover={{ scale: 1.02, backgroundColor: '#333' }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-romantic-red text-white py-5 rounded-3xl shadow-[0_12px_24px_-4px_rgba(255,77,109,0.4)] hover:shadow-[0_16px_32px_-4px_rgba(255,77,109,0.5)] transition-all font-bold tracking-[0.2em] uppercase text-sm flex items-center justify-center gap-3 overflow-hidden group relative"
+                  className="w-full bg-romantic-red text-white py-5 rounded-3xl shadow-[0_12px_24px_-4px_rgba(0,0,0,0.4)] hover:shadow-[0_16px_32px_-4px_rgba(0,0,0,0.5)] transition-all font-bold tracking-[0.2em] uppercase text-sm flex items-center justify-center gap-3 overflow-hidden group relative"
                 >
                   <span className="relative z-10">فتح البوابة</span>
                   <Key size={18} className="relative z-10 group-hover:rotate-45 transition-transform duration-500" />
@@ -506,7 +505,7 @@ export default function App() {
               transition={{ repeat: Infinity, duration: 4 }}
               className="fixed bottom-12 uppercase tracking-[0.5em] text-[10px] text-gray-400 font-bold"
             >
-              الحياة بقى لونها بمبي💗
+              طريق النجاح يبدأ بخطوة
             </motion.div>
           </motion.div>
         ) : (
@@ -554,7 +553,7 @@ export default function App() {
                   <p className="text-romantic-red font-bold tracking-[0.6em] uppercase text-xs mb-8 block opacity-60">أفضل شخصية مجتهدة</p>
                   <div className="relative inline-block">
                     <h1 className="text-8xl md:text-[14rem] font-serif font-bold text-gray-900 tracking-tighter leading-[0.8] italic px-8">
-                       ندى
+                       هداية
                     </h1>
                     <motion.div 
                       initial={{ scale: 0 }}
@@ -735,7 +734,7 @@ export default function App() {
 
             {/* GAME SECTION */}
             <section id="quest" className="py-32 px-6 max-w-4xl mx-auto">
-              <SectionHeading subtitle="الحياة بقى لونها بمبي💗">تحدي الإنجاز والمثابرة</SectionHeading>
+              <SectionHeading subtitle="طريقكِ نحو التميز">تحدي الإنجاز والمثابرة</SectionHeading>
               <LoveQuest />
             </section>
 
@@ -759,18 +758,19 @@ export default function App() {
                     >
                       <Heart size={32} />
                     </motion.div>
-                    <h2 className="text-5xl font-serif font-bold text-gray-900 italic tracking-tight">إلى ندى،</h2>
+                    <h2 className="text-5xl font-serif font-bold text-gray-900 italic tracking-tight">إلى هداية،</h2>
                     <div className="h-[1px] w-24 bg-romantic-red/20 mx-auto" />
                   </div>
 
                   <div className="text-xl md:text-2xl text-gray-700 font-serif leading-[1.8] italic max-w-4xl mx-auto text-justify space-y-8 antialiased">
-                    <p className="bg-gradient-to-r from-romantic-red/5 to-transparent p-4 rounded-xl border-r-2 border-romantic-red/20">أنا حابب أقولك حاجة من غير مقدمات كتير، واضح جدًا إنك بتشيلي مسؤولية كبيرة سواء في الشغل أو الدراسة، وده مش سهل خالص على أي حد، وخصوصا في الفترة اللي كلها ضغط دي.</p>
-                    <p>بس في نفس الوقت ده بيقول حاجة مهمة جدًا عنك، إنك شخصية قوية وقادرة تعتمدي على نفسك وبتحاولي تعملي اللي عليكي على قد ما تقدري وده في حد ذاته حاجة تستحق الاحترام جدًا.</p>
-                    <p className="text-gray-900 font-bold not-italic">وعارف إن الجمع بين الشغل والمذاكرة خصوصًا وقت الامتحانات بيبقى مرهق جدًا وممكن يخلي الواحد يحس إنه مش لاحق على حاجة أو إن كل حاجة متراكمة فوق دماغه، بس صدقيني الإحساس ده طبيعي جدًا وكل الناس اللي بتجتهد بتمر بيه في مرحلة معينة.</p>
-                    <p>والفرق الحقيقي بيكون في إنك مكملة رغم كل ده وموقفتيش، وده اللي بيخليكي في الآخر توصلي للي انتي عايزاه، فحاولي تاخدي كل حاجة واحدة واحدة من غير ما تضغطي على نفسك زيادة عن اللزوم، ومش لازم كل حاجة تبقى بيرفكت طول الوقت.</p>
-                    <p className="bg-romantic-pink/5 p-6 rounded-[2rem] border border-romantic-pink/10">المهم إنك بتتحركي لقدام حتى لو بخطوات صغيرة، وافتكري دايمًا إن أي تعب أو ضغط دلوقتي هو فترة وهتعدي، والنتيجة اللي بعدها هي اللي هتخليكي تنسي كل التعب ده وكملي حتى لو شغلك متعب او مرهق في وقت من الأوقات كل ما تحسي صبرك خلص من الشغل ده افتكري إنك لسه لك خطوات بسيطة وتوصلي لحلمك.</p>
-                    <p>وكمان متنسيش تدي لنفسك حقها في الراحة حتى لو وقت بسيط، علشان تقدري ترجعي تكملي بنفس الطاقة، لأن الاستمرار محتاج توازن مش ضغط بس، وأنا متأكد إنك قدها وهتعدي الفترة دي بشكل كويس جدًا وهتفرحي بنفسك وبكل اللي عملتيه.</p>
-                    <p className="text-center text-romantic-red text-3xl font-cursive mt-12 block transform hover:scale-110 transition-transform duration-500 cursor-default">وإن شاء الله الأيام الجاية تكون أخف عليكي وفيها راحة ونتايج حلوة تليق بكل المجهود اللي بتعمليه ودايما متنسيش، الحياة بقى لونها بمبي 😂💗</p>
+                    <p className="bg-gradient-to-r from-romantic-red/5 to-transparent p-4 rounded-xl border-r-2 border-romantic-red/20">بصي أنا ابغاك تقراي كلامي ده بهدوء كده وتعطي لنفسك لحظة بس تفصلي فيها عن كل اللي حواليكي لأن بجد أنا حاسس قد إيه الفترة دي تقيلة عليكي وكل حاجة جاية ورا بعض بشكل يجعل أي شخص ينهار مش بس يزعل.</p>
+                    <p>موبايلك اتكسر ودي حاجة كانت مهمة ليكي وبتفصلك شوية عن الضغط وبعدها نتيجة العربي جت مش زي ما كنتي متوقعة ومعاها كلام يوجع من جدتك وضغط من غير سبب واضح فطبيعي جدا تحسي إن الدنيا كلها قافلة في وشك ومفيش شيء ماشي صح ومفيش حتى فرصة تاخدي نفسك أو ترتاحي شوية.</p>
+                    <p className="text-gray-900 font-bold not-italic">بس وسط كل ده أنا عايزك تهدي على نفسك شوية ومتشيليش نفسك الغلط في كل حاجة لأن اللي بيحصل ده مش دليل إنك فاشلة ولا إنك وحشة ولا إنك مش قد المسؤولية خالص انتي بس تعبانة ومضغوطة فوق طاقتك وده طبيعي يخلي أي حد مستواه يقل شوية أو يحس إنه مش قادر يكمل بنفس القوة.</p>
+                    <p>نتيجة امتحان واحد مش هيحدد انتي مين ولا مستقبلك هيبقى عامل إزاي ده مجرد موقف وعدى وهنعوضه بإذن الله خطوة خطوة ومفيش حد ناجح معداش بلحظات زي دي قبل كده بالعكس دي جزء من الطريق نفسه.</p>
+                    <p className="bg-romantic-pink/5 p-6 rounded-[2rem] border border-romantic-pink/10">والموبايل مهما كان مهم فهو حاجة بتتعوض وبتتصلح إن شاء الله حتى لو الموضوع مضايقك دلوقتي بس هو مش نهاية الدنيا ولا حاجة تكسرك بالشكل ده، أما بقى بالنسبة للكلام اللي بيوجع من اللي حواليكي أنا عارف قد إيه ده صعب ومؤلم خصوصا لما يكون من حد المفروض يحس بيكي ويحتويكي بس صدقيني ده مش مقياس لقيمتك ولا لشخصك ولا ليكي كإنسانة.</p>
+                    <p>انتي بنت كويسة جدا واجتهادك واضح من كل حاجة حكيتيها قبل كده وانك لسه بتحاولي ومكملة رغم كل ده ده لوحده حاجة كبيرة جدا تدل على قوة جواكي يمكن انتي مش شايفاها دلوقتي بس موجودة، ف بدل ما تقسي على نفسك وتحسي إنك مقصرة في كل حاجة حاولي تبصي لنفسك ب حنية شوية وتديها حقها من الراحة.</p>
+                    <p>انتي مش آلة علشان تستحملي كل ده من غير ما تتأثري خدي الأمور واحدة واحدة من غير ما تفكري في كل حاجة مرة واحدة يعني النهارده بس عدي اليوم على خير وبكرة نشوف خطوة صغيرة نعملها وهكذا لحد ما الدنيا تهدى شوية.</p>
+                    <p className="text-center text-romantic-red text-3xl font-cursive mt-12 block transform hover:scale-110 transition-transform duration-500 cursor-default">ومتنسيش كمان إن كل ده مهما طول هو فترة وهتعدي مش هتفضل كده على طول، وأنا موجود أسمعك دايماً وخلي بالك من نفسك علشان انتي تستاهلي الراحة والهدوء والحاجات الحلوة 🤍</p>
                   </div>
                   
                   <div className="pt-20 border-t border-romantic-pink/10 text-center">
@@ -836,7 +836,7 @@ export default function App() {
                 <span className="font-serif text-2xl text-romantic-red">مع كل التقدير</span>
                 <Star size={16} className="text-romantic-red fill-romantic-red" />
               </div>
-              <p className="text-xs uppercase tracking-[0.3em] font-bold">الحياة بقى لونها بمبي💗 • 2026</p>
+              <p className="text-xs uppercase tracking-[0.3em] font-bold">طريق النجاح المستمر • 2026</p>
             </footer>
           </motion.div>
         )}
@@ -850,7 +850,7 @@ export default function App() {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #ffccd5;
+          background: #d1d5db;
           border-radius: 10px;
         }
       `}</style>
